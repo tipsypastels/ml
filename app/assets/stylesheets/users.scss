@@ -1,0 +1,54 @@
+// Place all the styles related to the users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.Profile {
+  h1.username {
+    margin: 0;
+    margin-bottom: 5px;
+  }
+
+  .stats strong {
+    margin-right: 0.25em;
+  }
+}
+
+
+$avatar-sizes: (
+  small: 50px,
+  medium: 70px,
+  normal: 90px,
+  huge: 200px,
+);
+
+.avatar {
+  border-radius: 50%;
+  margin-right: 0.75rem;
+  background-size: cover;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @each $name, $size in $avatar-sizes {
+    &.avatar-#{$name} {
+      width: $size;
+      height: $size;
+    }
+  }
+
+  &.editable {
+    cursor: pointer;
+
+    filter: saturate(25%);
+    font-size: 2em;
+    color: white;
+
+    i {
+      display: initial;
+      background-color: mix(transparent, black, 10%);
+      padding: 0.75em;
+      border-radius: 50%;
+    }
+  }
+}

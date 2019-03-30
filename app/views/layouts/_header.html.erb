@@ -1,0 +1,19 @@
+<div class="flex v-center">
+  <div id="header" class="grows">
+    <h2>
+      <%= link_to 'Meteor Lens', root_path %>
+    </h2>
+
+    <h4>
+      <%= page_title %>
+    </h4>
+  </div>
+
+  <% if user_signed_in? %>
+    <div id="header-user">
+      <h4>
+        <%= link_to current_username, current_user, class: 'hidden' %>
+      </h4>
+    </div>
+  <% end %>
+</div>

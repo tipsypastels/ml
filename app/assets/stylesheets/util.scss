@@ -1,0 +1,34 @@
+header {
+  font-family: $font-header;
+}
+
+body {
+  font-family: $font-primary;
+  color: $primary-color-dark;
+  background-color: $background-color;
+}
+
+a {
+  text-decoration: none;
+
+  &.hidden {
+    color: inherit;
+  }
+  
+  &:not(.hidden) {
+    color: $accent-color;
+  }
+}
+
+
+.no-margin {
+  margin: 0;
+}
+
+.margin-minor {
+  margin: 0.25em;
+}
+
+.margin-minor-left {
+  margin-left: 0.25em;
+}

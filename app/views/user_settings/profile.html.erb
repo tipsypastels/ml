@@ -1,0 +1,12 @@
+<%= form_with(url: settings_save_path, local: true) do |f| %>
+  <%= f.hidden_field :back, value: 'profile' %>
+
+  <div class="field">
+    <%= f.label :avatar %>
+    <%= f.file_field :avatar %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

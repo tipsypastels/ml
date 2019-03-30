@@ -40,6 +40,12 @@ gem 'react-rails'
 
 gem 'devise'
 
+gem 'friendly_id'
+
+gem 'active_model_serializers', '~> 0.10.0'
+
+gem 'acts_as_follower', github: 'tcocca/acts_as_follower', branch: 'master'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

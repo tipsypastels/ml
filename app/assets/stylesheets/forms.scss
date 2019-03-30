@@ -1,0 +1,9 @@
+input[type='text'].invisible {
+  border: none;
+  font-weight: 700;
+  background-color: $background-color;
+  letter-spacing: unset;
+  font-family: $font-header;
+  outline: none !important;
+  padding: 0;
+}

@@ -1,0 +1,29 @@
+<% @page_title = @topic.title_squeezed %>
+
+<div class="topic-header blackblock">
+  <h1 class="no-margin">
+    <%= @topic.title %>
+  </h1>
+
+  <div class="subblock flex v-center">
+    <%= avatar_for @topic.user, size: 'medium' %>
+
+    <div class="name-area">
+      <% if @topic.user.name? %>
+        <div class="name larger bold">
+          <%= @topic.user.name %>
+        </div>
+
+        <div class="username smaller">
+          <%= @topic.user.username_at %>
+        </div>
+      <% else %>
+        <div class="username larger bold">
+          <%= @topic.user.username_at %>
+        </div>
+      <% end %>
+    </div>  
+  </div>
+</div>
+
+<%= react_component 'PostList', posts: @posts_json %>

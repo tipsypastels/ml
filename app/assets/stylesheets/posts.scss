@@ -1,0 +1,11 @@
+.post {
+  &:not(:last-child) {
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+    border-bottom: 1px solid mix(black, transparent, 5%);
+  }
+
+  .post-header {
+    margin-bottom: 1em;
+  }
+}

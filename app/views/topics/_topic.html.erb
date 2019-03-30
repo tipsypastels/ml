@@ -1,0 +1,9 @@
+<div class="topic" data-topic-id="<%= topic.id %>">
+  <header>
+    <h2>
+      <%= link_to topic.title, topic %>
+    </h2>
+  </header>
+
+  Posted by <%= link_to topic.username, topic.user %>
+</div>

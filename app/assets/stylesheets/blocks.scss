@@ -1,0 +1,18 @@
+.blackblock {
+  background-color: #222;
+  color: white;
+  padding: 0.25em;
+  user-select: none;
+
+  &.rot-small {
+    transform: rotate(1deg);
+  }
+
+  &.rot-small-reverse {
+    transform: rotate(-1deg);
+  }
+
+  &.rot-medium-reverse {
+    transform: rotate(-4deg);
+  }
+}

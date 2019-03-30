@@ -1,0 +1,15 @@
+<div class="post" data-post-id="<%= post.id %>">
+  <div class="post-header">
+    <%= link_to post.user, class: 'hidden flex v-center' do %>
+      <%= avatar_for(post.user, size: 'small') %>
+
+      <div class="blackblock rot-small">
+        <%= post.username_at %>
+      </div>
+  <% end %>
+  </div>
+
+  <div class="post-body">
+    <%= post.content %>
+  </div>
+</div>

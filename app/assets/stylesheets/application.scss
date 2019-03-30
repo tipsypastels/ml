@@ -1,0 +1,47 @@
+@import 'variables';
+@import '**/*';
+
+#header {
+  margin: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  user-select: none;
+
+  h2, h4 {
+    margin: 0;
+    margin-bottom: 5px;
+    background-color: #222;
+    padding: 0.25em;
+    display: inline-block;
+
+    transform: rotate(-2deg);
+
+    color: white;
+  }
+
+  a {
+    color: $accent-color-light;
+  }
+
+  h4 {
+    margin-left: 0.75em;
+  }
+}
+
+#header-user {
+  h4 {
+    margin: 25px;
+    background-color: #222;
+    transform: rotate(2deg);
+    color: white;
+    padding: 0.25em;
+    user-select: none;
+  }
+}
+
+main {
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+}

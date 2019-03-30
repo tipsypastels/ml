@@ -1,0 +1,23 @@
+<% @page_title = @user.username_at %>
+
+<%= react_component 'Profile',
+  name: @user.name,
+  username: @user.username_at,
+  isSelf: current_user?(@user),
+  isSignedIn: user_signed_in?,
+  authenticity_token: form_authenticity_token,
+
+  avatarURL: url_for(@user.avatar),
+  editProfilePath: settings_profile_path,
+
+  topicCount: @user.topics_count,
+  postCount: @user.posts_count,
+  followCount: @user.follow_count,
+  initialFollowersCount: @user.followers_count,
+  
+  follow: {
+    initialFollowing: current_user&.following?(@user),
+    followPath: api_follow_path(@user),
+    unfollowPath: api_unfollow_path(@user),
+  }
+%>
