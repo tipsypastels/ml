@@ -12,20 +12,23 @@ class FollowForm extends React.Component {
   render () {
     const { following } = this.state;
 
-    const followButton = 
+    const followButton = (
       <button
         className="primary"
         onClick={this.followAPI}
       >
         Follow
-      </button>;
+      </button>
+    );
 
-      const unfollowButton = 
+    const unfollowButton = (
       <button
         onClick={this.unfollowAPI}
       >
         Unfollow
-      </button>;
+      </button>
+    );
+    
     return (
       <div className="follow">
         {following ? unfollowButton  : followButton}

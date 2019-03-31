@@ -1,5 +1,8 @@
 class PostSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
+  include MarkdownHelper
+
+  alias post object
 
   attributes :id, 
              :content, 
@@ -8,22 +11,26 @@ class PostSerializer < ActiveModel::Serializer
              :avatarURL,
              :userIsOP
   
+  def content
+    markdown_for post.content
+  end
+
   def username
-    object.username_at
+    post.username_at
   end
 
   def profileURL
-    user_path(object.user)
+    user_path(post.user)
   end
 
   def avatarURL
-    rails_blob_path(object.user.avatar, 
+    rails_blob_path(post.user.avatar, 
       disposition: 'attachment',
       only_path: true
     )
   end
 
   def userIsOP
-    object.user == object.topic.user
+    post.user == post.topic.user
   end
 end

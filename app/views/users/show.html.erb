@@ -102,7 +102,7 @@
       
       <div class="flex v-center">
         <% if @user.facebook? %>
-         <%= link_to facebook_link(@user.facebook), class: 'hidden' do %>
+         <%= link_to facebook_link(@user.facebook), class: 'hidden', target: '_blank' do %>
           <div class="facebook margin-medium-right horiz-list-margin">
             <%= fa('facebook', 'fab') %>
 
@@ -114,7 +114,7 @@
         <% end %>
 
         <% if @user.twitter? %>
-          <%= link_to twitter_link(@user.twitter), class: 'hidden' do %>
+          <%= link_to twitter_link(@user.twitter), class: 'hidden', target: '_blank' do %>
             <div class="twitter margin-medium-right horiz-list-margin">
               <%= fa('twitter', 'fab') %>
 

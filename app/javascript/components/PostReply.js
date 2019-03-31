@@ -41,6 +41,7 @@ class PostReply extends React.Component {
   }
 
   updateText = (e) => {
+    this.props.sendTypingNotif();
     this.setState({ text: e.target.value });
   }
 
@@ -56,7 +57,9 @@ class PostReply extends React.Component {
         }
       }
     }).then(({ data }) => {
-      this.props.appendPost(data.post);
+      // no longer need to append posts here,
+      // we use ActionCable which also makes all the
+      // threads live update
       this.setState({ text: '' });
     })
 

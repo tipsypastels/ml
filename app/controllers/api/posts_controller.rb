@@ -8,6 +8,12 @@ class Api::PostsController < ApplicationController
     if post.save
       post_json = PostSerializer.new(post).serializable_hash
       render json: { post: post_json }
+
+      ActionCable.server.broadcast(
+        "topic_channel_#{post.topic_id}", 
+        type: 'post',
+        post: post_json,
+      )
     else
       render json: { errors: post.errors.full_messages }
     end

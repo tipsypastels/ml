@@ -18,4 +18,6 @@ Rails.application.routes.draw do
   get '/@:id', to: 'users#show', as: :user
 
   resources :topics
+
+  mount ActionCable.server => '/cable'
 end

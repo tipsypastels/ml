@@ -2,20 +2,28 @@ class SocialMediaNormalizer
   def initialize(params)
     @params = params
   end
-
-  SOCIAL_MEDIA = %i|twitter facebook|
-
+  
   def normalize!
-    SOCIAL_MEDIA.each do |sm|
+    SOCIAL_MEDIA.each do |sm, callback|
       if @params[sm].present?
-        @params[sm] = normalize_username(@params[sm])
+        @params[sm] = callback.call(@params[sm])
       end
     end
   end
 
-  private
-
-  def normalize_username(name)
+  DEFAULT_NORMALIZER = proc { |name|
     name.split('/').last.tr('@', '')
-  end
+  }
+
+  SOCIAL_MEDIA = {
+    twitter:  DEFAULT_NORMALIZER,
+    facebook: DEFAULT_NORMALIZER,
+    discord: proc { |name| 
+      next name unless name.match? /\w+\s?#\d{4}/
+      name.sub(/\b#/, ' #').strip
+    },
+  }
+
+  private_constant :DEFAULT_NORMALIZER, 
+                   :SOCIAL_MEDIA
 end

@@ -9,8 +9,6 @@ class Profile extends React.Component {
     super(props);
     this.state = {
       followers: this.props.initialFollowersCount,
-      fieldsToSave: {},
-      name: this.props.name,
     };
   }
 
@@ -95,10 +93,10 @@ class Profile extends React.Component {
   }
 
   buildUsernameBit() {
-    if (this.state.name) {
+    if (this.props.name) {
       return (
         <React.Fragment>
-          {this.state.name}
+          {this.props.name}
 
           <span className="text-light smaller margin-minor-left">
             {this.props.username}
@@ -110,16 +108,6 @@ class Profile extends React.Component {
     }
   }
 
-  markForSave = (newSave) => {
-    this.setState({ 
-      fieldsToSave: Object.assign(
-        {}, 
-        this.state.fieldsToSave, 
-        newSave,
-      ) 
-    });
-  }
-
   increaseFollowers = () => {
     this.setState({ followers: this.state.followers + 1 });
   }
@@ -129,4 +117,4 @@ class Profile extends React.Component {
   }  
 }
 
-export default Profile
+export default Profile;

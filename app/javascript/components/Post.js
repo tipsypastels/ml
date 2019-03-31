@@ -1,7 +1,5 @@
 import React from "react";
 
-import Avatar from './Avatar';
-
 class Post extends React.Component {
   render () {
     return (
@@ -9,7 +7,7 @@ class Post extends React.Component {
         <div className="post-header">
           <div className="flex v-center">
             <a href={this.props.profileURL} className="hidden flex v-center">
-              <Avatar url={this.props.avatarURL} size="small" />
+              <img src={this.props.avatarURL} className="avatar avatar-small" />
 
               <div className="blackblock rot-small">
                 {this.props.username}
@@ -28,12 +26,13 @@ class Post extends React.Component {
           </div>
         </div>
 
-        <div className="post-body">
-          {this.props.content}
-        </div>
+        <div 
+          className="post-body" 
+          dangerouslySetInnerHTML={{ __html: this.props.content }}
+        />
       </div>
     );
   }
 }
 
-export default Post
+export default Post;
