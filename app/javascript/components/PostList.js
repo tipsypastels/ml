@@ -52,6 +52,12 @@ class PostList extends React.Component {
     );
   }
 
+  componentWillUnmount() {
+    if (this.channel) {
+      this.channel.unsubscribe();
+    }
+  }
+
   render () {
     const posts = this.state.posts.map(post => {
       return (
@@ -126,11 +132,6 @@ class PostList extends React.Component {
   }
 
   removeTypingUser(username) {
-    const idx = this.state.typingUsers.indexOf(username);
-    if (idx === -1) {
-      return;
-    }
-
     const typingUsers = this.state.typingUsers
       .filter(name => name !== username);
 

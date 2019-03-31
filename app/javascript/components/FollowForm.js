@@ -9,6 +9,38 @@ class FollowForm extends React.Component {
     }
   }
 
+  componentDidMount() {
+    let component = this;
+
+    this.channel = App.cable.subscriptions.create(
+      {
+        channel: 'UserChannel',
+        user_id: this.props.userID,
+      }, 
+
+      {
+        received({ followers }) {
+          component.setFollowingIfIn(followers);
+          component.props.setFollowers(followers.length);
+        },
+
+        sendFollow({ from, to }) {
+          this.perform('send_follow', { from, to });
+        },
+
+        sendUnfollow({ from, to }) {
+          this.perform('send_unfollow', { from, to });
+        }
+      },
+    );
+  }
+
+  componentWillUnmount() {
+    if (this.channel) {
+      this.channel.unsubscribe();
+    }
+  }
+
   render () {
     const { following } = this.state;
 
@@ -36,31 +68,25 @@ class FollowForm extends React.Component {
     );
   }
 
-  followAPI = () => {
-    this.sendRequest('post', this.props.followPath)
-      .then(() => {
-        this.setState({ following: true });
-        this.props.increaseFollowers();
-      });
-  }
-
-  unfollowAPI = () => {
-    this.sendRequest('delete', this.props.unfollowPath)
-      .then(() => {
-        this.setState({ following: false });
-        this.props.decreaseFollowers();
-      });
-  }
-
-  sendRequest(method, url) {
-    const { authenticity_token } = this.props;
-    return axios({
-      method,
-      url,
-      data: { authenticity_token },
+  setFollowingIfIn = (followers) => {
+    this.setState({ 
+      following: followers.includes(this.props.currentUserID) 
     });
   }
 
+  followAPI = () => {
+    this.channel.sendFollow({
+      from: this.props.currentUserID,
+      to: this.props.userID,
+    });
+  }
+
+  unfollowAPI = () => {
+    this.channel.sendUnfollow({
+      from: this.props.currentUserID,
+      to: this.props.userID,
+    });
+  }
 }
 
 export default FollowForm;

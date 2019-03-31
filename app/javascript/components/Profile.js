@@ -45,8 +45,9 @@ class Profile extends React.Component {
                       followPath={this.props.follow.followPath}
                       unfollowPath={this.props.follow.unfollowPath}
 
-                      increaseFollowers={this.increaseFollowers}
-                      decreaseFollowers={this.decreaseFollowers}
+                      setFollowers={this.setFollowers}
+                      userID={this.props.userID}
+                      currentUserID={this.props.currentUserID}
                     />
                   )
                 }
@@ -108,13 +109,9 @@ class Profile extends React.Component {
     }
   }
 
-  increaseFollowers = () => {
-    this.setState({ followers: this.state.followers + 1 });
+  setFollowers = (followers) => {
+    this.setState({ followers });
   }
-
-  decreaseFollowers = () => {
-    this.setState({ followers: this.state.followers - 1 });
-  }  
 }
 
 export default Profile;

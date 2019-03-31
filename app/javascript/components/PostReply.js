@@ -56,12 +56,12 @@ class PostReply extends React.Component {
           content: this.state.text,
         }
       }
-    }).then(({ data }) => {
+    }).then(() => {
       // no longer need to append posts here,
       // we use ActionCable which also makes all the
       // threads live update
       this.setState({ text: '' });
-    })
+    });
 
     e.preventDefault();
     return false;

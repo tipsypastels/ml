@@ -8,16 +8,11 @@ class TopicChannel < ApplicationCable::Channel
   end
 
   def send_typing(data)
-    username = data['username']
-
-    stream(username, :started_typing)
-
+    stream(data['username'], :started_typing)
   end
 
   def send_stopped_typing(data)
-    username = data['username']
-    
-    stream(username, :stopped_typing)
+    stream(data['username'], :stopped_typing)
   end
 
   private
