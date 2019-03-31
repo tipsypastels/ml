@@ -21,3 +21,120 @@
     unfollowPath: api_unfollow_path(@user),
   }
 %>
+
+<div class="blackblock user-stats padding-medium">
+  <% if @user.age? || @user.gender? || @user.location? || @user.relationship_status? %>
+    <div class="main-stats">
+      <div class="title border-bottom no-margin-top">
+        Profile Information
+      </div>
+
+      <div class="flex v-center">
+        <% if @user.age? %>
+          <div class="age margin-medium-right horiz-list-margin">
+            age
+            
+            <strong class="margin-minor-left">
+              <%= @user.age %>
+            </strong>
+          </div>
+        <% end %>
+        
+        <% if @user.gender? %>
+          <div class="gender margin-medium-right horiz-list-margin">
+            gender
+            
+            <strong class="margin-minor-left">
+              <%= @user.gender %>
+            </strong>
+          </div>
+        <% end %>
+        
+        <% if @user.location? %>
+          <div class="location margin-medium-right horiz-list-margin">
+            location
+            
+            <strong class="margin-minor-left">
+              <%= @user.location %>
+            </strong>
+          </div>
+        <% end %>
+
+        <% if @user.relationship_status? %>
+          <div class="relationship-status margin-medium-right horiz-list-margin">
+            relationship status
+
+            <strong class="margin-minor-left">
+              <%= @user.relationship_status %>
+            </strong>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+  <% end %>
+
+  <% if @user.interests? %>
+    <div class="interests">
+      <div class="title border-bottom">
+        Interests
+      </div>
+
+      <%= markdown_for @user.interests %>
+    </div>
+  <% end %>
+
+  <% if @user.biography? %>
+    <div class="biography">
+      <div class="title border-bottom">
+        Biography
+      </div>
+
+      <%= markdown_for @user.biography %>
+    </div>
+  <% end %>
+
+  <% if @user.social_media? %>
+    <div class="user-social-media">
+      <div class="title border-bottom">
+        Social Media
+      </div>
+      
+      <div class="flex v-center">
+        <% if @user.facebook? %>
+         <%= link_to facebook_link(@user.facebook), class: 'hidden' do %>
+          <div class="facebook margin-medium-right horiz-list-margin">
+            <%= fa('facebook', 'fab') %>
+
+            <span class="margin-minor-left">
+              <%= @user.facebook %>
+            </span>
+            <% end %>
+          </div>
+        <% end %>
+
+        <% if @user.twitter? %>
+          <%= link_to twitter_link(@user.twitter), class: 'hidden' do %>
+            <div class="twitter margin-medium-right horiz-list-margin">
+              <%= fa('twitter', 'fab') %>
+
+              <span class="margin-minor-left">
+                @<%= @user.twitter %>
+              </span>
+            <% end %>
+          </div>
+        <% end %>
+
+        <% if @user.discord? %>
+            <div class="twitter margin-medium-right horiz-list-margin">
+            <%= fa('discord', 'fab') %>
+
+            <span class="margin-minor-left">
+              <%= @user.discord %>
+            </span>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

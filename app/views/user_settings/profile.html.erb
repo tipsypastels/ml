@@ -1,9 +1,56 @@
+<% @page_title = 'Edit Your Profile' %>
+
 <%= form_with(url: settings_save_path, local: true) do |f| %>
   <%= f.hidden_field :back, value: 'profile' %>
 
   <div class="field">
     <%= f.label :avatar %>
     <%= f.file_field :avatar %>
+  </div>
+
+  <div class="field">
+    <%= f.label :biography %>
+    <%= f.text_area :biography, class: 'blackblock', value: current_user.biography %>
+  </div>
+
+  <div class="field">
+    <%= f.label :interests %>
+    <%= f.text_area :interests, class: 'blackblock', value: current_user.interests %>
+  </div>
+
+  <div class="field">
+    <%= f.label :age %>
+    <%= f.text_field :age, value: current_user.age %>
+  </div>
+
+  <div class="field">
+    <%= f.label :gender %>
+    <%= f.select :gender, User.genders.keys, value: current_user.gender %>
+  </div>
+
+  <div class="field">
+    <%= f.label :location %>
+    <%= f.text_field :location, value: current_user.location %>
+  </div>
+
+  <div class="field">
+    <%= f.label :relationship_status %>
+    <%= f.select :relationship_status, User.relationship_statuses.keys, value: current_user.relationship_status %>
+  </div>
+
+  <div class="field">
+    <%= f.label :facebook %>
+    <%= f.text_field :facebook, value: current_user.facebook %>
+  </div>
+
+  <div class="field">
+    <%= f.label :twitter %>
+    <%= f.text_field :twitter, value: current_user.twitter %>
+  </div>
+
+  <div class="field">
+    <%= f.label :discord %>
+    <%= f.text_field :discord, value: current_user.discord %>
   </div>
 
   <div class="actions">

@@ -15,4 +15,18 @@
   &.rot-medium-reverse {
     transform: rotate(-4deg);
   }
+
+  .title {
+    font-weight: bold;
+    padding-bottom: 0.25em;
+    margin-bottom: 0.25em;
+
+    &:not(.no-margin-top) {
+      margin-top: 0.75em;
+    }
+
+    &.border-bottom {
+      border-bottom: 1px solid mix(white, transparent, 50%);
+    }
+  }
 }

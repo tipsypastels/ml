@@ -44,6 +44,10 @@ gem 'friendly_id'
 
 gem 'active_model_serializers', '~> 0.10.0'
 
+gem 'readingtime'
+
+gem 'redcarpet'
+
 gem 'acts_as_follower', github: 'tcocca/acts_as_follower', branch: 'master'
 
 group :development, :test do

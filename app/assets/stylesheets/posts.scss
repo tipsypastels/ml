@@ -9,3 +9,19 @@
     margin-bottom: 1em;
   }
 }
+
+.PostReply {
+  margin-top: 1em;
+  margin-bottom: 2em;
+  padding-top: 1em;
+  border-top: 1px solid mix(black, transparent, 5%);
+
+  textarea {
+    font-family: $font-primary;
+    font-size: 1em;
+  }
+
+  input[type='submit'] {
+    margin-top: 0.5em;
+  }
+}

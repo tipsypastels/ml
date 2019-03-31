@@ -19,4 +19,9 @@ input[type='submit'],
   &.primary {
     background-color: $accent-color;
   }
+
+  &[disabled] {
+    background-color: grey;
+    cursor: not-allowed;
+  }
 }

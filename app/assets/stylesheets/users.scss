@@ -2,6 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+[data-react-class="Profile"]:empty {
+  // before it's loaded
+  height: 200px;
+}
+
 .Profile {
   h1.username {
     margin: 0;
@@ -51,4 +56,8 @@ $avatar-sizes: (
       border-radius: 50%;
     }
   }
+}
+
+.user-stats {
+  margin-top: 2em;
 }

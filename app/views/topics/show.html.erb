@@ -5,25 +5,15 @@
     <%= @topic.title %>
   </h1>
 
-  <div class="subblock flex v-center">
-    <%= avatar_for @topic.user, size: 'medium' %>
-
-    <div class="name-area">
-      <% if @topic.user.name? %>
-        <div class="name larger bold">
-          <%= @topic.user.name %>
-        </div>
-
-        <div class="username smaller">
-          <%= @topic.user.username_at %>
-        </div>
-      <% else %>
-        <div class="username larger bold">
-          <%= @topic.user.username_at %>
-        </div>
-      <% end %>
-    </div>  
+  <div class="subblock flex v-center small">
+    Estimated read time - <%= @topic.reading_time(format: :approx) %>
   </div>
 </div>
 
-<%= react_component 'PostList', posts: @posts_json %>
+<%= react_component('PostList',
+  topicID: @topic.id,
+  posts: @posts_json,
+  canPost: can_post?,
+  newPostEndpoint: api_new_post_path,
+  authenticity_token: form_authenticity_token,
+) %>

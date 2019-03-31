@@ -7,3 +7,19 @@ input[type='text'].invisible {
   outline: none !important;
   padding: 0;
 }
+
+textarea {
+  display: block;
+  width: 100%;
+
+  min-height: 100px;
+  padding: 1em !important;
+  color: white;
+  outline: none !important;
+  resize: none;
+
+  &::placeholder {
+    color: #eee;
+    font-style: italic;
+  }
+}

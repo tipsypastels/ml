@@ -7,12 +7,14 @@ class Post extends React.Component {
     return (
       <div className="post" data-post-id={this.props.id}>
         <div className="post-header">
-          <a href={this.props.profileURL} className="hidden flex v-center">
-            <Avatar url={this.props.avatarURL} size="small" />
+          <div className="flex v-center">
+            <a href={this.props.profileURL} className="hidden flex v-center">
+              <Avatar url={this.props.avatarURL} size="small" />
 
-            <div className="blackblock rot-small">
-              {this.props.username}
-            </div>
+              <div className="blackblock rot-small">
+                {this.props.username}
+              </div>
+            </a>
 
             {(() => {
               if (this.props.userIsOP) {
@@ -23,7 +25,7 @@ class Post extends React.Component {
                 );
               }
             })()}
-          </a>
+          </div>
         </div>
 
         <div className="post-body">

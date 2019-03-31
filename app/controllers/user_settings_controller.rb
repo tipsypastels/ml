@@ -8,6 +8,9 @@ class UserSettingsController < ApplicationController
     get_params = settings_params
     back = get_params.delete(:back)
 
+    normalizer = SocialMediaNormalizer.new(get_params)
+    normalizer.normalize!
+
     if current_user.update(get_params)
       redirect_to current_user
     else
@@ -18,6 +21,18 @@ class UserSettingsController < ApplicationController
   private
 
   def settings_params
-    params.permit(:avatar, :name)
+    params.permit(
+      :avatar, 
+      :name, 
+      :interests,
+      :biography,
+      :age, 
+      :gender, 
+      :location,
+      :relationship_status,
+      :facebook,
+      :twitter,
+      :discord,
+    )
   end
 end

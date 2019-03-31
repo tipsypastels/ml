@@ -1,12 +1,14 @@
 class Topic < ApplicationRecord
   default_scope do
-    order(created_at: :desc)
+    order(updated_at: :desc)
   end
 
   extend FriendlyId
   friendly_id :title, use: :slugged
-  has_many :posts
+  
+  has_many :posts, dependent: :destroy
   belongs_to :user, counter_cache: true
+  
   validates :title, presence: true
 
   delegate :username, to: :user
@@ -19,5 +21,9 @@ class Topic < ApplicationRecord
     else
       title
     end
+  end
+
+  def reading_time(*args)
+    posts.collect(&:content).join("\n").reading_time(*args)
   end
 end

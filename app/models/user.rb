@@ -10,8 +10,8 @@ class User < ApplicationRecord
     uniqueness: { case_sensitive: false },
     format: { with: /\A[^\s!#$%^&*()（）=+;:'"\[\]\{\}|\\\/<>?,]+\z/ }
 
-  has_many :topics
-  has_many :posts
+  has_many :topics, dependent: :destroy
+  has_many :posts, dependent: :destroy
   has_one_attached :avatar
 
   acts_as_followable
@@ -22,6 +22,24 @@ class User < ApplicationRecord
   end
 
   before_save :set_default_avatar
+
+  enum gender: {
+    female:    0,
+    male:      1,
+    nonbinary: 2,
+    other:     3,
+  }
+
+  enum relationship_status: {
+    single:  0,
+    taken:   1,
+    married: 2,
+    open:    3,
+  }
+
+  def social_media?
+    facebook? || twitter? || discord?
+  end
 
   def username_at
     "@#{username}"

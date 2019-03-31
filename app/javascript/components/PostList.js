@@ -1,6 +1,7 @@
 import React from "react"
 
 import Post from './Post';
+import PostReply from './PostReply';
 
 class PostList extends React.Component {
   constructor(props) {
@@ -26,10 +27,24 @@ class PostList extends React.Component {
     });
 
     return (
-      <div className="PostList">
-        {posts}
+      <div>
+        <div className="PostList">
+          {posts}
+        </div>
+        <div className="PostReply-container">
+          <PostReply
+            topicID={this.props.topicID}
+            newPostEndpoint={this.props.newPostEndpoint}
+            authenticity_token={this.props.authenticity_token}
+            appendPost={this.appendPost}
+          />
+        </div>
       </div>
     );
+  }
+
+  appendPost = (post) => {
+    this.setState({ posts: [...this.state.posts, post] });
   }
 }
 

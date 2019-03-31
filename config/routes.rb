@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     post '/follow/:id', to: 'follows#create', as: :follow
     delete '/unfollow/:id', to: 'follows#destroy', as: :unfollow
 
-    post '/updateprofile', to: 'profile_update#update', as: :profile_update
+    post '/posts/new', to: 'posts#create', as: :new_post
   end
 
   scope '/settings', as: :settings do
