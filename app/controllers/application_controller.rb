@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   def current_username
-    current_user.username_at
+    current_user&.username_at
   end
   helper_method :current_username
 
@@ -8,11 +8,6 @@ class ApplicationController < ActionController::Base
     current_user && current_user == user
   end
   helper_method :current_user?
-
-  def debug_puts(*args)
-    puts *args.map { |arg| "\n\n\n#{arg}\n\n\n" }
-  end
-  helper_method :debug_puts
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 

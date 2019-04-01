@@ -1,5 +1,6 @@
 import React from "react";
 import unique from 'array-unique';
+import axios from "axios";
 
 import Post from './Post';
 import PostReply from './PostReply';
@@ -29,6 +30,10 @@ class PostList extends React.Component {
             case 'post':
               component.appendPost(data.post);
               component.removeTypingUser(data.post.username);
+              break;
+            
+            case 'post_edit':
+              component.updatePostWithEdits(data.post);
               break;
 
             case 'started_typing':
@@ -63,7 +68,9 @@ class PostList extends React.Component {
       return (
         <Post
           key={post.id}
+          canEdit={this.props.currentUserID === post.user_id}
           {...post}
+          submitEdits={this.submitEdits}
         />
       )
     });
@@ -149,6 +156,35 @@ class PostList extends React.Component {
 
   appendPost = (post) => {
     this.setState({ posts: [...this.state.posts, post] });
+  }
+
+  submitEdits = ({ postID, content,})  => {
+    const { authenticity_token } = this.props;
+    axios({
+      method: 'post',
+      url: this.props.editPostEndpoint,
+      data: {
+        authenticity_token,
+        content,
+        id: postID,
+      }
+    });
+  }
+
+  updatePostWithEdits = (post) => {
+    let id = post.id;
+    let storedIds = this.state.posts.map(p => p.id);
+
+    let idx = storedIds.indexOf(id);
+
+    if (idx === -1) {
+      return;
+    }
+
+    let postsDup = [...this.state.posts];
+    postsDup[idx] = post;
+
+    this.setState({ posts: postsDup });
   }
 }
 

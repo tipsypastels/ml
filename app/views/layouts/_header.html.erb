@@ -9,11 +9,17 @@
     </h4>
   </div>
 
-  <% if user_signed_in? %>
-    <div id="header-user">
-      <h4>
+  <div id="header-user">
+    <h4>
+      <% if user_signed_in? %>
         <%= link_to current_username, current_user, class: 'hidden' %>
-      </h4>
-    </div>
-  <% end %>
+
+        |
+
+        <%= link_to 'New Topic', new_topic_path, class: 'hidden' %>
+      <% else %>
+        <%= link_to 'Sign In', new_user_registration_path, class: 'hidden' %>
+      <% end %>
+    </h4>
+  </div>
 </div>

@@ -11,6 +11,14 @@ module MarkdownHelper
     autolink:                     true,
     superscript:                  true,
     disable_indented_code_blocks: true,
+    strikethrough:                true,
+    no_intra_emphasis:            true,
+    tables:                       true,
+    lax_spacing:                  true,
+    highlight:                    true,
+    quote:                        true,
+    footnotes:                    true,
+    underline:                    true,
   }
 
   RENDERER = Redcarpet::Render::HTML.new(MARKDOWN_OPTIONS)

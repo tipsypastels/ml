@@ -5,13 +5,15 @@ class PostSerializer < ActiveModel::Serializer
   alias post object
 
   attributes :id, 
-             :content, 
+             :content,
+             :markdown_content,
+             :user_id, 
              :username,
              :profileURL,
              :avatarURL,
              :userIsOP
   
-  def content
+  def markdown_content
     markdown_for post.content
   end
 

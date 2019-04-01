@@ -19,6 +19,28 @@ class Api::PostsController < ApplicationController
     end
   end
 
+  def update
+    post = Post.find(params[:id])
+    
+    if !post || post.user != current_user
+      return
+    end
+    
+    post.content = params[:content]
+    if post.save
+      post_json = PostSerializer.new(post).serializable_hash
+      render json: { post: post_json }
+      
+      ActionCable.server.broadcast(
+        "topic_channel_#{post.topic_id}",
+        type: 'post_edit',
+        post: post_json,
+      )
+    else
+      render json: { errors: post.errors.full_messages }
+    end
+  end
+
   private
 
   def post_params

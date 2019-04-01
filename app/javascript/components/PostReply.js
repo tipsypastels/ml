@@ -20,7 +20,6 @@ class PostReply extends React.Component {
           name='post[content]'
           placeholder="Reply..."
           onChange={this.updateText}
-          className="blackblock"
           value={this.state.text}
         />
         <div className="flex">

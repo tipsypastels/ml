@@ -1,6 +1,14 @@
 import React from "react";
 
 class Post extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      editing: false,
+      content: this.props.content,
+    };
+  }
+
   render () {
     return (
       <div className="post" data-post-id={this.props.id}>
@@ -12,6 +20,7 @@ class Post extends React.Component {
               <div className="blackblock rot-small">
                 {this.props.username}
               </div>
+
             </a>
 
             {(() => {
@@ -23,15 +32,74 @@ class Post extends React.Component {
                 );
               }
             })()}
+
+            <div className="grows">
+            </div>
+
+            {(() => {
+              if (this.state.editing) {
+                return (
+                  <button 
+                    className="blackblock rot-small-reverse"
+                    onClick={this.saveEdits}
+                  >
+                    Save
+                  </button>
+                );
+              } else if (this.props.canEdit) {
+                return (
+                  <button 
+                    className="blackblock rot-small-reverse"
+                    onClick={this.toggleEditing}
+                  >
+                    Edit
+                  </button>
+                );
+              }
+            })()}
           </div>
         </div>
 
-        <div 
-          className="post-body" 
-          dangerouslySetInnerHTML={{ __html: this.props.content }}
-        />
+        {(() => {
+          if (this.state.editing) {
+            return (
+              <textarea
+                onChange={this.setContent}
+                defaultValue={this.props.content}
+              />
+            );
+          } else {
+            return (
+              <div
+                className="post-body"
+                dangerouslySetInnerHTML={{ __html: this.props.markdown_content }}
+              />
+            );
+          }
+        })()}
       </div>
     );
+  }
+
+  setContent = (e) => {
+    this.setState({ content: e.target.value });
+  }
+
+  toggleEditing = (e) => {
+    this.setState({ editing: !this.state.editing });
+  }
+
+  saveEdits = (e) => {
+    this.toggleEditing();
+
+    if (this.state.content === this.props.content) {
+      return;
+    }
+
+    this.props.submitEdits({ 
+      postID: this.props.id, 
+      content: this.state.content,
+    });    
   }
 }
 

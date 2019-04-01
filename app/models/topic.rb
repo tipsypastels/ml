@@ -3,6 +3,8 @@ class Topic < ApplicationRecord
     order(updated_at: :desc)
   end
 
+  acts_as_taggable
+
   extend FriendlyId
   friendly_id :title, use: :slugged
   

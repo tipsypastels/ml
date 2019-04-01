@@ -6,4 +6,8 @@
   </header>
 
   Posted by <%= link_to topic.username, topic.user %>
+
+  <% if topic.tags.present? %>
+    <%= render partial: 'tags/tag_list', locals: { tags: topic.tags } %>
+  <% end %>
 </div>

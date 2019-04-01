@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     delete '/unfollow/:id', to: 'follows#destroy', as: :unfollow
 
     post '/posts/new', to: 'posts#create', as: :new_post
+    post '/posts/edit', to: 'posts#update', as: :edit_post
   end
 
   scope '/settings', as: :settings do
@@ -14,7 +15,13 @@ Rails.application.routes.draw do
 
   root to: 'topics#index'
 
-  devise_for :users
+  devise_for :users,
+    path: '',
+    path_names: {
+      sign_in: 'login',
+      sign_out: 'login',
+    }
+    
   get '/@:id', to: 'users#show', as: :user
 
   resources :topics

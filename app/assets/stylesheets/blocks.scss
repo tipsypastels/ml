@@ -3,30 +3,44 @@
   color: white;
   padding: 0.25em;
   user-select: none;
-
-  &.rot-small {
-    transform: rotate(1deg);
-  }
-
-  &.rot-small-reverse {
-    transform: rotate(-1deg);
-  }
-
-  &.rot-medium-reverse {
-    transform: rotate(-4deg);
-  }
-
+  
   .title {
     font-weight: bold;
     padding-bottom: 0.25em;
     margin-bottom: 0.25em;
-
+    
     &:not(.no-margin-top) {
       margin-top: 0.75em;
     }
-
+    
     &.border-bottom {
       border-bottom: 1px solid mix(white, transparent, 50%);
     }
+  }
+
+  &.inline-block {
+    display: inline-block;
+  }
+}
+
+.rot-small {
+  transform: rotate(1deg);
+}
+
+.rot-small-reverse {
+  transform: rotate(-1deg);
+}
+
+.rot-medium-reverse {
+  transform: rotate(-4deg);
+}
+
+.rot-children-alternate {
+  :nth-child(odd) {
+    @extend .rot-small;
+  }
+
+  :nth-child(even) {
+    @extend .rot-small-reverse;
   }
 }
