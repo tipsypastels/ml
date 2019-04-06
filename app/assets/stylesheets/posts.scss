@@ -1,22 +1,20 @@
-.post {
-  &:not(:last-child) {
-    padding-bottom: 1em;
-    margin-bottom: 1em;
-    border-bottom: 1px solid mix(black, transparent, 5%);
-  }
+.post-badge {
+  width: 96px;
+}
 
-  .post-header {
-    margin-bottom: 1em;
-  }
+.textarea.margin-bottom {
+  margin-bottom: 0.5rem;
 }
 
 .PostReply {
-  margin-top: 1em;
-  margin-bottom: 2em;
-  padding-top: 1em;
-  border-top: 1px solid mix(black, transparent, 5%);
+  margin-top: 1.5rem !important;
 
-  input[type='submit'] {
-    margin-top: 0.5em;
+  .notification {
+    margin-bottom: 0.25rem !important;
   }
+}
+
+.typing-notif {
+  margin-top: 0.75em;
+  margin-bottom: 0.75em;
 }

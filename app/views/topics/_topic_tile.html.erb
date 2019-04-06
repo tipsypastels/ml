@@ -1,0 +1,25 @@
+<article class="topic-tile tile is-child flex flex-column notification is-<%= color_for(topic) %>">
+  <section class="topic-main flex-grows">
+    <p class="title">
+      <%= link_to topic do %>
+        <%= topic.title %>
+      <% end %>
+    </p>
+
+    <p class="subtitle">
+      <%= link_to topic.user do %>
+        <%= topic.username %>
+      <% end %>
+    </p>
+  </section>
+
+  <section class="topic-controls level">
+    <div class="level-left">
+      <%= rp 'topic_controls', topic: topic %>
+    </div>
+
+    <div class="level-right">
+      <%= rp 'tags/tag_list', tags: topic.tags %>
+    </div>
+  </section>
+</article>

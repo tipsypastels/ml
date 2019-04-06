@@ -46,7 +46,7 @@ class FollowForm extends React.Component {
 
     const followButton = (
       <button
-        className="primary"
+        className="button is-primary"
         onClick={this.followAPI}
       >
         Follow
@@ -55,6 +55,7 @@ class FollowForm extends React.Component {
 
     const unfollowButton = (
       <button
+        className="button is-text"
         onClick={this.unfollowAPI}
       >
         Unfollow

@@ -1,0 +1,23 @@
+<nav class="topic-controls level">
+  <div class="level-item">
+    <div class="icon">
+      <%= fa 'comment-alt' %>
+    </div>
+
+    <span>
+      <strong><%= topic.posts_count %></strong>
+      <%= 'post'.pluralize(topic.posts_count) %>
+    </span>
+  </div>
+
+  <div class="level-item has-text-centered">
+    <div class="icon">
+      <%= fa 'heart' %>
+    </div>
+
+    <span>
+      <strong><%= topic.likes_count %></strong>
+      <%= 'like'.pluralize(topic.likes_count) %>
+    </span>
+  </div>
+</nav>

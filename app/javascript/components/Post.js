@@ -1,5 +1,8 @@
 import React from "react";
 
+import Avatar from './Avatar';
+import PostContent from './PostContent';
+
 class Post extends React.Component {
   constructor(props) {
     super(props);
@@ -11,73 +14,32 @@ class Post extends React.Component {
 
   render () {
     return (
-      <div className="post" data-post-id={this.props.id}>
-        <div className="post-header">
-          <div className="flex v-center">
-            <a href={this.props.profileURL} className="hidden flex v-center">
-              <img src={this.props.avatarURL} className="avatar avatar-small" />
+      <article className="Post media">
+        <section className="media-left">
+          <Avatar url={this.props.avatarURL} size="96x96" />
 
-              <div className="blackblock rot-small">
-                {this.props.username}
-              </div>
+          {(() => {
+             if (this.props.badgeContent) {
+              return (
+                <div className={`post-badge tag is-${this.props.topicColor}`}>
+                  {this.props.badgeContent}
+                </div>
+              );
+            }
+          })()}
+        </section>
 
-            </a>
-
-            {(() => {
-              if (this.props.userIsOP) {
-                return (
-                  <div className="blackblock rot-medium-reverse margin-minor-left small-caps" title="Original Poster">
-                    op
-                  </div>
-                );
-              }
-            })()}
-
-            <div className="grows">
-            </div>
-
-            {(() => {
-              if (this.state.editing) {
-                return (
-                  <button 
-                    className="blackblock rot-small-reverse"
-                    onClick={this.saveEdits}
-                  >
-                    Save
-                  </button>
-                );
-              } else if (this.props.canEdit) {
-                return (
-                  <button 
-                    className="blackblock rot-small-reverse"
-                    onClick={this.toggleEditing}
-                  >
-                    Edit
-                  </button>
-                );
-              }
-            })()}
-          </div>
-        </div>
-
-        {(() => {
-          if (this.state.editing) {
-            return (
-              <textarea
-                onChange={this.setContent}
-                defaultValue={this.props.content}
-              />
-            );
-          } else {
-            return (
-              <div
-                className="post-body"
-                dangerouslySetInnerHTML={{ __html: this.props.markdown_content }}
-              />
-            );
-          }
-        })()}
-      </div>
+        <section className="media-content">
+          <PostContent 
+            editing={this.state.editing}
+            setContent={this.setContent}
+            cancelEdits={this.cancelEdits}
+            saveEdits={this.saveEdits}
+            toggleEditing={this.toggleEditing}
+            {...this.props}
+          />
+        </section>
+      </article>
     );
   }
 
@@ -86,6 +48,10 @@ class Post extends React.Component {
   }
 
   toggleEditing = (e) => {
+    if (!this.props.canEdit) {
+      return;
+    }
+    
     this.setState({ editing: !this.state.editing });
   }
 
@@ -100,6 +66,11 @@ class Post extends React.Component {
       postID: this.props.id, 
       content: this.state.content,
     });    
+  }
+
+  cancelEdits = (e) => {
+    this.toggleEditing();
+    this.setState({ content: this.props.content });
   }
 }
 

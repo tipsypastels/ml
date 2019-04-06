@@ -1,13 +1,13 @@
 <% @page_title = @topic.title_squeezed %>
 
-<div class="topic-header blackblock">
-  <h1 class="no-margin">
+<div class="topic-header notification is-<%= color_for(@topic) %>">
+  <p class="title">
     <%= @topic.title %>
-  </h1>
+  </p>
 
-  <div class="subblock flex v-center small">
-    Estimated read time - <%= @topic.reading_time(format: :approx) %>
-  </div>
+  <p class="subtitle">
+    <%= @topic.reading_time(format: :approx) %> reading time
+  </p>
 </div>
 
 <%= react_component('PostList',
@@ -18,5 +18,6 @@
   currentUserID: current_user&.id,
   newPostEndpoint: api_new_post_path,
   editPostEndpoint: api_edit_post_path,
+  topicColor: color_for(@topic),
   authenticity_token: form_authenticity_token,
 ) %>

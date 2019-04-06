@@ -2,14 +2,10 @@
   display: flex;
 }
 
-.v-center {
-  align-items: center;
-}
-
-.grows {
-  flex-grow: 1;
-}
-
-.column {
+.flex-column {
   flex-direction: column;
+}
+
+.flex-grows {
+  flex-grow: 1;
 }

@@ -86,7 +86,7 @@ class PostList extends React.Component {
         {(() => {
           if (typingNotif) {
             return (
-              <div className="typing-notif blackblock rot-small">
+              <div className={`typing-notif tag is-medium is-${this.props.topicColor}`}>
                 {typingNotif}
               </div>
             );
@@ -103,6 +103,7 @@ class PostList extends React.Component {
                   authenticity_token={this.props.authenticity_token}
                   appendPost={this.appendPost}
                   sendTypingNotif={this.sendTypingNotif}
+                  topicColor={this.props.topicColor}
                 />
               </div>
             );

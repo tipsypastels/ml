@@ -1,28 +1,34 @@
 class PostSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
   include MarkdownHelper
+  include TopicsHelper
 
   alias post object
 
   attributes :id, 
              :content,
-             :markdown_content,
+             :markdownContent,
              :user_id, 
              :username,
              :profileURL,
+             :badgeContent,
              :avatarURL,
-             :userIsOP
+             :userIsOP,
+             :createdAt,
+             :updatedAt,
+             :everUpdated,
+             :topicColor
   
-  def markdown_content
+  def markdownContent
     markdown_for post.content
-  end
-
-  def username
-    post.username_at
   end
 
   def profileURL
     user_path(post.user)
+  end
+
+  def badgeContent
+    PostBadgeBuilder.new(post).build!
   end
 
   def avatarURL
@@ -34,5 +40,21 @@ class PostSerializer < ActiveModel::Serializer
 
   def userIsOP
     post.user == post.topic.user
+  end
+
+  def createdAt
+    post.created_at
+  end
+
+  def updatedAt
+    post.updated_at
+  end
+
+  def everUpdated
+    post.ever_updated?
+  end
+
+  def topicColor
+    color_for(post.topic)
   end
 end

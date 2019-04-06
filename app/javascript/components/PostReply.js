@@ -12,24 +12,31 @@ class PostReply extends React.Component {
   render () {
     return (
       <form 
-        className="PostReply"
+        className={`PostReply message is-${this.props.topicColor}`}
         action={this.props.newPostEndpoint}
         onSubmit={this.submitPost}
       >
-        <textarea 
-          name='post[content]'
-          placeholder="Reply..."
-          onChange={this.updateText}
-          value={this.state.text}
-        />
-        <div className="flex">
-          <div className="grows"></div>
-          <input 
-            type="submit" 
-            value="Submit"
-            className="primary"
-            disabled={!this.enableButton}
+        <div className="message-header">
+          Leave a reply
+        </div>
+
+        <div className="message-body">
+          <textarea 
+            className="textarea margin-bottom"
+            name='post[content]'
+            placeholder="Reply..."
+            onChange={this.updateText}
+            value={this.state.text}
           />
+          <div className="flex">
+            <div className="grows"></div>
+            <input 
+              type="submit" 
+              value="Submit"
+              className={`button is-${this.props.topicColor}`}
+              disabled={!this.enableButton}
+            />
+          </div>
         </div>
       </form>
     );

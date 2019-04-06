@@ -1,19 +1,25 @@
 <% @page_title = 'New Topic' %>
 
-<%= form_with(model: @topic) do |form| %>
-  <div class="field">
-    <%= form.text_field :title, placeholder: 'Title' %>
+<%= form_with(model: @topic, class: 'message is-primary', builder: MlFormBuilder) do |form| %>
+  <div class="message-header">
+    Let's make something new...
   </div>
 
-  <div class="field">
-    <%= form.text_area :content, placeholder: 'Content'  %>
-  </div>
+  <div class="message-body">
+    <div class="field">
+      <%= form.text_field :title, class: 'input', placeholder: 'Title', icon: 'signature', autofocus: true %>
+    </div>
 
-  <div class="fields">
-    <%= form.text_field :tag_list, placeholder: '(Optional) Thread Tags' %>
-  </div>
+    <div class="field">
+      <%= form.text_area :content, class: 'textarea', placeholder: 'Content'  %>
+    </div>
 
-  <div class="actions">
-    <%= form.submit %>
+    <div class="field">
+      <%= form.text_field :tag_list, class: 'input', placeholder: '(Optional) Thread Tags', icon: 'tags' %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit class: 'button is-primary' %>
+    </div>
   </div>
 <% end %>

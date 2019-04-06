@@ -1,16 +1,9 @@
-.topic-header {
-  padding: 1em;
-  margin-bottom: 2em;
-
-  h1 {
-    margin: 0;
-    margin-bottom: 0.5em;
-    padding-bottom: 0.25em;
-    border-bottom: 1px solid mix(white, transparent, 50%);
+.topic-tile {
+  .topic-main {
+    margin-bottom: 2rem;
   }
-}
 
-.typing-notif {
-  display: inline-block;
-  margin-top: 2em;
+  a {
+    text-decoration: none !important;
+  }
 }

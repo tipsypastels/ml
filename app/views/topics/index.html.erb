@@ -1,3 +1,9 @@
 <% @page_title = 'Browsing Topics' %>
 
-<%= render partial: 'topic', collection: @topics, cached: true %> 
+<div class="topic-groups">
+  <% cache @topics do %>
+    <% @topics.each_slice(3) do |topics| %>
+      <%= rp 'topics_batch', topics: topics %>
+    <% end %>
+  <% end %>
+</div>

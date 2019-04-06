@@ -15,8 +15,10 @@
   <body>
     <%= render partial: 'layouts/header', locals: { page_title: @page_title } %>
 
-    <main>
-      <%= yield %>
-    </main>
+    <section class="section" id="page">
+      <div class="container">
+        <%= yield %>
+      </div>
+    </section>
   </body>
 </html>

@@ -3,6 +3,7 @@ import axios from 'axios';
 import pluralize from 'pluralize';
 
 import FollowForm from './FollowForm';
+import Avatar from './Avatar';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -16,12 +17,12 @@ class Profile extends React.Component {
     return (
       <div className="Profile flex v-center">
         <div className="avatar-container">
-          <img className="avatar avatar-huge" src={this.props.avatarURL}/>
+          <Avatar url={this.props.avatarURL} size="128x128" />
         </div>
 
-        <div className="main-content grows">
+        <div className="main-content">
           <header className="flex v-center">
-            <h1 className="username grows flex v-center">
+            <h1 className="title">
               {this.buildUsernameBit()}
             </h1>
 
@@ -33,7 +34,7 @@ class Profile extends React.Component {
 
                 if (this.props.isSelf) {
                   return (
-                    <a href={this.props.editProfilePath} className="btn">
+                    <a href={this.props.editProfilePath} className="button is-primary">
                       Edit Profile
                     </a>
                   );
@@ -55,37 +56,53 @@ class Profile extends React.Component {
             </div>
           </header>
 
-          <div className="stats flex">
-            <div className="topics margin-minor">
+          <div className="level" >
+            <div className="">
               <strong>
                 {this.props.topicCount}
               </strong>
 
-              {pluralize('topic', this.props.topicCount)}
+              &nbsp;
+
+              <span>
+                {pluralize('topic', this.props.topicCount)}
+              </span>
             </div>
 
-            <div className="posts margin-minor">
+            <div className="level-item">
               <strong>
                 {this.props.postCount}
               </strong>
 
-              {pluralize('post', this.props.postCount)}
+              &nbsp;
+
+              <span>
+                {pluralize('post', this.props.postCount)}
+              </span>
             </div>
 
-            <div className="follows margin-minor">
+            <div className="level-itemr">
               <strong>
                 {this.props.followCount}
               </strong>
 
-              following
+              &nbsp;
+
+              <span>
+                following
+              </span>
             </div>
 
-            <div className="followers margin-minor">
+            <div className="level-item">
               <strong>
                 {this.state.followers}  
               </strong>
+
+              &nbsp;
               
-              {pluralize('follower', this.state.followers)}
+              <span>
+                {pluralize('follower', this.state.followers)}
+              </span>
             </div>
           </div>
         </div>

@@ -1,6 +1,10 @@
 module UsersHelper
   def avatar_for(user, size: 'normal')
-    image_tag(user.avatar, class: "avatar avatar-#{size}")
+    <<~HTML.html_safe
+      <figure class="avatar image is-48x48">
+        <img class="avatar-image" src="#{url_for(user.avatar)}" alt="#{user.username}'s Avatar"/>
+      </figure>
+    HTML
   end
 
   def can_post?

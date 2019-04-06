@@ -28,4 +28,8 @@ class Topic < ApplicationRecord
   def reading_time(*args)
     posts.collect(&:content).join("\n").reading_time(*args)
   end
+
+  def likes_count
+    0 # TODO
+  end
 end

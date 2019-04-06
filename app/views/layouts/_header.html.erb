@@ -1,25 +1,45 @@
-<div class="flex v-center">
-  <div id="header" class="grows">
-    <h2>
-      <%= link_to 'Meteor Lens', root_path %>
-    </h2>
+<nav class="navbar is-spaced" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <%= link_to root_path, class: 'navbar-item' do %>
+      <span class="icon is-large has-text-primary">
+        <%= fa 'meteor', class: 'fa-2x' %>
+      </span>
+    <% end %>
 
-    <h4>
-      <%= page_title %>
-    </h4>
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
   </div>
 
-  <div id="header-user">
-    <h4>
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
       <% if user_signed_in? %>
-        <%= link_to current_username, current_user, class: 'hidden' %>
-
-        |
-
-        <%= link_to 'New Topic', new_topic_path, class: 'hidden' %>
-      <% else %>
-        <%= link_to 'Sign Up', new_user_registration_path, class: 'hidden' %>
+        <%= link_to 'New Topic', new_topic_path, class: 'button is-primary' %>
       <% end %>
-    </h4>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <% if user_signed_in? %>
+          <%= link_to current_user do %>
+            <%= avatar_for current_user %>
+          <% end %>
+        <% else %>
+          <div class="buttons">
+            <%= link_to new_user_registration_path, class: 'button is-primary' do %>
+              <strong>
+                Sign up
+              </strong>
+            <% end %>
+
+            <%= link_to new_user_session_path, class: 'button is-light' do %>
+              Log in
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
-</div>
+</nav>
