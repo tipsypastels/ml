@@ -13,50 +13,8 @@ class Profile extends React.Component {
     };
   }
 
-  render () {
-    return (
-      <div className="Profile flex v-center">
-        <div className="avatar-container">
-          <Avatar url={this.props.avatarURL} size="128x128" />
-        </div>
-
-        <div className="main-content">
-          <header className="flex v-center">
-            <h1 className="title">
-              {this.buildUsernameBit()}
-            </h1>
-
-            <div className="control-area">
-              {(() => {
-                if (!this.props.isSignedIn) {
-                  return;
-                }
-
-                if (this.props.isSelf) {
-                  return (
-                    <a href={this.props.editProfilePath} className="button is-primary">
-                      Edit Profile
-                    </a>
-                  );
-                } else {
-                  return (
-                    <FollowForm
-                      authenticity_token={this.props.authenticity_token}
-                      initialFollowing={this.props.follow.initialFollowing}
-                      followPath={this.props.follow.followPath}
-                      unfollowPath={this.props.follow.unfollowPath}
-
-                      setFollowers={this.setFollowers}
-                      userID={this.props.userID}
-                      currentUserID={this.props.currentUserID}
-                    />
-                  )
-                }
-              })()}
-            </div>
-          </header>
-
-          <div className="level" >
+  /*
+  <div className="level" >
             <div className="">
               <strong>
                 {this.props.topicCount}
@@ -95,17 +53,120 @@ class Profile extends React.Component {
 
             <div className="level-item">
               <strong>
-                {this.state.followers}  
+                {this.state.followers}
               </strong>
 
               &nbsp;
-              
+
               <span>
                 {pluralize('follower', this.state.followers)}
               </span>
             </div>
           </div>
         </div>
+        */
+
+  render () {
+    return (
+      <div className="Profile">
+        <section className="profile-upper media">
+          <div className="media-left">
+            <Avatar url={this.props.avatarURL} size="128x128" />
+          </div>
+
+          <div className="media-content">
+            <header className="level">
+              <h1 className="level-left title">
+                {this.buildUsernameBit()}
+              </h1>
+
+              <div className="level-right">
+                {(() => {
+                  if (!this.props.isSignedIn) {
+                    return;
+                  }
+
+                  if (this.props.isSelf) {
+                    return (
+                      <a href={this.props.editProfilePath} className="button is-primary">
+                        Edit Profile
+                      </a>
+                    );
+                  } else {
+                    return (
+                      <FollowForm
+                        authenticity_token={this.props.authenticity_token}
+                        initialFollowing={this.props.follow.initialFollowing}
+                        followPath={this.props.follow.followPath}
+                        unfollowPath={this.props.follow.unfollowPath}
+
+                        setFollowers={this.setFollowers}
+                        userID={this.props.userID}
+                        currentUserID={this.props.currentUserID}
+                      />
+                    )
+                  }
+                })()}
+              </div>
+            </header>
+          </div>
+        </section>
+
+        <section className="profile-lower tile is-ancestor">
+          <div className="tile is-parent">
+            <div className="tile is-child notification is-primary">
+              <div className="level">
+                <div className="level-item has-text-centered">
+                  <div>
+                    <p class="title">
+                      {this.props.topicCount}
+                    </p>
+
+                    <p class="heading">
+                      {pluralize('Topic', this.props.topicCount)}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="level-item has-text-centered">
+                  <div>
+                    <p class="title">
+                      {this.props.postCount}
+                    </p>
+
+                    <p class="heading">
+                      {pluralize('Post', this.props.postCount)}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="level-item has-text-centered">
+                  <div>
+                    <p class="title">
+                      {this.props.followCount}
+                    </p>
+
+                    <p class="heading">
+                      {pluralize('Following', this.props.followCount)}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="level-item has-text-centered">
+                  <div>
+                    <p class="title">
+                      {this.state.followers}
+                    </p>
+
+                    <p class="heading">
+                      {pluralize('Followers', this.state.followers)}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     );
   }

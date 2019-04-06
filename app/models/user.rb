@@ -37,6 +37,10 @@ class User < ApplicationRecord
     open:    3,
   }
 
+  def about_info?
+    age? || gender? || location? || relationship_status?
+  end
+
   def social_media?
     facebook? || twitter? || discord?
   end

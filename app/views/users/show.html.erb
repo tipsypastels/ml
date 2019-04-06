@@ -24,6 +24,50 @@
   }
 %>
 
+<div class="tile is-ancestor">
+  <div class="tile is-parent is-vertical is-6">
+    <% if @user.about_info? %>
+      <div class="tile is-child notification is-primary">
+        <p class="subtitle">
+          About
+        </p>
+
+        <div class="content">
+
+        </div>
+      </div>
+    <% end %>
+
+    <div class="tile is-child notification is-primary">
+      <p class="subtitle">
+        Biography
+      </p>
+
+      <div class="content">
+        <%= markdown_for @user.biography %>
+      </div>
+    </div>
+  </div>
+
+  <div class="tile is-parent is-vertical">
+    <div class="tile is-child notification is-primary">
+      <p class="subtitle">
+        Interests
+      </p>
+
+      <div class="content">
+        <%= markdown_for @user.interests %>
+      </div>
+    </div>
+
+    <div class="tile is-child notification is-primary">
+      <p class="subtitle">
+        Social Media
+      </p>
+    </div>
+  </div>
+</div>
+
 <div class="blackblock user-stats padding-medium">
   <% if @user.age? || @user.gender? || @user.location? || @user.relationship_status? %>
     <div class="main-stats">

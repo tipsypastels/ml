@@ -1,3 +1,18 @@
 .navbar-item .avatar-image {
   max-height: unset !important;
 }
+
+.Profile .profile-upper.media {
+  align-items: center;
+}
+
+.Profile {
+  .profile-upper {
+    align-items: center;
+  }
+
+  .profile-lower > .tile.is-parent {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+}
