@@ -34,7 +34,7 @@ class PostSerializer < ActiveModel::Serializer
   def avatarURL
     rails_blob_path(post.user.avatar, 
       disposition: 'attachment',
-      only_path: true
+      only_path: true,
     )
   end
 

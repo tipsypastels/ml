@@ -21,7 +21,10 @@ class FollowForm extends React.Component {
       {
         received({ followers }) {
           component.setFollowingIfIn(followers);
-          component.props.setFollowers(followers.length);
+
+          if (typeof component.props.setFollowers === 'function') {
+            component.props.setFollowers(followers.length);
+          }
         },
 
         sendFollow({ from, to }) {

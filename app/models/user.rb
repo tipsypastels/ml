@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+  default_scope do
+    order('username ASC')
+  end
+
   extend FriendlyId
   friendly_id :username
 

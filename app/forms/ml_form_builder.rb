@@ -20,8 +20,7 @@ class MlFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def label(field, **opts)
-    opts[:class] ||= ''
-    opts[:class] << " label"
+    ClassBuilder.for(opts).add('label')
     super
   end
 

@@ -5,6 +5,7 @@ class TopicBuilder
     content = params.delete(:content)
     @topic = Topic.new(params)
     @topic.user = author
+    @topic.tag_list = TagPreprocessor.preprocess(@topic.tag_list)
 
     @post = Post.new(content: content)
     @post.topic = @topic

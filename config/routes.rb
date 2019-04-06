@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       sign_out: 'login',
     }
     
+  resources :users, only: :index
   get '/@:id', to: 'users#show', as: :user
 
   resources :topics

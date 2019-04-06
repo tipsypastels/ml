@@ -1,0 +1,14 @@
+
+
+<%= react_component 'User', {
+  userID: user.id,
+  username: user.username,
+  avatarURL: url_for(user.avatar),
+  profileURL: url_for(user),
+  
+  isSelf: current_user?(user),
+  followsYou: current_user && user.following?(current_user),
+  initialFollowing: current_user&.following?(user),
+  canFollow: current_user && !current_user?(user),
+  currentUserID: current_user&.id,
+} %>

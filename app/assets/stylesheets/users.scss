@@ -6,18 +6,25 @@
   align-items: center;
 }
 
+.follows-you {
+  margin-top: 0.25em;
+  margin-left: 0.75rem;
+}
+
 .Profile {
   .profile-upper {
     align-items: center;
 
-    .follows-you {
-      margin-top: 0.25em;
-      margin-left: 0.75rem;
-    }
   }
 
   .profile-lower > .tile.is-parent {
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
   }
+}
+
+[data-react-class="User"]:not(:first-child) .User.media {
+  border-top: 1px solid rgba(219, 219, 219, 0.5); // TODO variable
+  margin-top: 1rem;
+  padding-top: 1rem;
 }

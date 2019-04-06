@@ -56,11 +56,7 @@ class Profile extends React.Component {
                   } else {
                     return (
                       <FollowForm
-                        authenticity_token={this.props.authenticity_token}
                         initialFollowing={this.props.follow.initialFollowing}
-                        followPath={this.props.follow.followPath}
-                        unfollowPath={this.props.follow.unfollowPath}
-
                         setFollowers={this.setFollowers}
                         userID={this.props.userID}
                         currentUserID={this.props.currentUserID}
