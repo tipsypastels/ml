@@ -9,6 +9,11 @@
 .Profile {
   .profile-upper {
     align-items: center;
+
+    .follows-you {
+      margin-top: 0.25em;
+      margin-left: 0.75rem;
+    }
   }
 
   .profile-lower > .tile.is-parent {

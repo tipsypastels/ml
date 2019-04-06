@@ -55,7 +55,7 @@ class FollowForm extends React.Component {
 
     const unfollowButton = (
       <button
-        className="button is-text"
+        className="button is-light"
         onClick={this.unfollowAPI}
       >
         Unfollow

@@ -13,59 +13,6 @@ class Profile extends React.Component {
     };
   }
 
-  /*
-  <div className="level" >
-            <div className="">
-              <strong>
-                {this.props.topicCount}
-              </strong>
-
-              &nbsp;
-
-              <span>
-                {pluralize('topic', this.props.topicCount)}
-              </span>
-            </div>
-
-            <div className="level-item">
-              <strong>
-                {this.props.postCount}
-              </strong>
-
-              &nbsp;
-
-              <span>
-                {pluralize('post', this.props.postCount)}
-              </span>
-            </div>
-
-            <div className="level-itemr">
-              <strong>
-                {this.props.followCount}
-              </strong>
-
-              &nbsp;
-
-              <span>
-                following
-              </span>
-            </div>
-
-            <div className="level-item">
-              <strong>
-                {this.state.followers}
-              </strong>
-
-              &nbsp;
-
-              <span>
-                {pluralize('follower', this.state.followers)}
-              </span>
-            </div>
-          </div>
-        </div>
-        */
-
   render () {
     return (
       <div className="Profile">
@@ -76,9 +23,23 @@ class Profile extends React.Component {
 
           <div className="media-content">
             <header className="level">
-              <h1 className="level-left title">
-                {this.buildUsernameBit()}
-              </h1>
+              <div className="level-left">
+                <div>
+                  <h1 className="title">
+                    {this.buildUsernameBit()}
+                  </h1>
+                </div>
+
+                {(() => {
+                  if (this.props.followsYou) {
+                    return (
+                      <span className="follows-you tag is-primary">
+                        Follows You
+                      </span>
+                    );
+                  }
+                })()}
+              </div>
 
               <div className="level-right">
                 {(() => {
@@ -118,11 +79,11 @@ class Profile extends React.Component {
               <div className="level">
                 <div className="level-item has-text-centered">
                   <div>
-                    <p class="title">
+                    <p className="title">
                       {this.props.topicCount}
                     </p>
 
-                    <p class="heading">
+                    <p className="heading">
                       {pluralize('Topic', this.props.topicCount)}
                     </p>
                   </div>
@@ -130,11 +91,11 @@ class Profile extends React.Component {
 
                 <div className="level-item has-text-centered">
                   <div>
-                    <p class="title">
+                    <p className="title">
                       {this.props.postCount}
                     </p>
 
-                    <p class="heading">
+                    <p className="heading">
                       {pluralize('Post', this.props.postCount)}
                     </p>
                   </div>
@@ -142,23 +103,23 @@ class Profile extends React.Component {
 
                 <div className="level-item has-text-centered">
                   <div>
-                    <p class="title">
+                    <p className="title">
                       {this.props.followCount}
                     </p>
 
-                    <p class="heading">
-                      {pluralize('Following', this.props.followCount)}
+                    <p className="heading">
+                      Following
                     </p>
                   </div>
                 </div>
 
                 <div className="level-item has-text-centered">
                   <div>
-                    <p class="title">
+                    <p className="title">
                       {this.state.followers}
                     </p>
 
-                    <p class="heading">
+                    <p className="heading">
                       {pluralize('Followers', this.state.followers)}
                     </p>
                   </div>

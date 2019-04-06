@@ -16,6 +16,7 @@
   postCount: @user.posts_count,
   followCount: @user.follow_count,
   initialFollowersCount: @user.followers_count,
+  followsYou: current_user && @user.following?(current_user),
   
   follow: {
     initialFollowing: current_user&.following?(@user),
