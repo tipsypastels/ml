@@ -1,92 +1,132 @@
 <% @page_title = 'Edit Your Profile' %>
 
-<%= form_with(url: settings_save_path, local: true) do |f| %>
+<%= form_with(url: settings_save_path, local: true, builder: MlFormBuilder) do |f| %>
   <%= f.hidden_field :back, value: 'profile' %>
 
-  <div class="field">
-    <%= f.label :avatar, class: 'subtitle' %>
-    <%= rp 'file_picker', f: f, field: :avatar %>
-  </div>
-
-  <div class="field">
-    <%= f.label :biography, class: 'subtitle' %>
-      <div class="control">
-      <%= f.text_area :biography, class: 'textarea', value: current_user.biography %>
+  <div class="message is-primary">
+    <div class="message-header">
+      Avatar
     </div>
-  </div>
 
-  <div class="field">
-    <%= f.label :interests %>
-    <%= f.text_area :interests, class: 'textarea', value: current_user.interests %>
-  </div>
+    <div class="message-body level">
+      <div class="level-left">
+        <%= avatar_for current_user %>
+      </div>
 
-  <div class="field">
-    <%= f.label :age, class: 'subtitle' %>
-    <div class="control has-icons-left">
-      <span class="icon is-small is-left">
-        <i class="fas fa-birthday-cake"></i>
-      </span>
-      <%= f.text_field :age, class: 'input', value: current_user.age %>
-    </div>
-  </div>
-
-  <div class="field">
-    <div class="control">
-      <%= f.label :gender, class: 'subtitle' %>
-      <div class="select">
-        <%= f.select :gender, User.genders.keys, value: current_user.gender %>
+      <div class="level-right">
+        <%= f.file_field :avatar %>
       </div>
     </div>
   </div>
 
-  <div class="field">
-    <%= f.label :location, class: 'subtitle' %>
-     <div class="control has-icons-left">
-      <span class="icon is-small is-left">
-        <i class="fas fa-globe"></i>
-      </span>
-      <%= f.text_field :location, class: 'input', value: current_user.location %>
+  <div class="message is-primary">
+    <div class="message-header">
+      User Stats
+    </div>
+
+    <div class="message-body">
+      <div class="field">
+        <%= f.label :age %>
+
+        <%= f.number_field :age, 
+          class: 'input', 
+          value: current_user.age,
+          icon: 'birthday-cake'
+        %>
+      </div>
+
+      <div class="field">
+        <%= f.label :gender %>
+
+        <%= f.smart_select :gender, User.genders, 
+          class: 'is-fullwidth',
+          icon: 'venus-mars',
+          include_blank: true,
+          selected: current_user.gender
+        %>
+      </div>
+
+      <div class="field">
+        <%= f.label :location %>
+
+        <%= f.text_field :location,
+          class: 'input',
+          icon: 'globe',
+          value: current_user.location
+        %>
+      </div>
+
+      <div class="field">
+        <%= f.label :relationship_status %>
+
+        <%= f.smart_select :relationship_status, User.relationship_statuses,
+          class: 'is-fullwidth',
+          icon: 'heart',
+          include_blank: true,
+          selected: current_user.relationship_status
+        %>
     </div>
   </div>
 
-  <div class="field">
-    <div class="control">
-      <%= f.label :relationship_status, class: 'subtitle' %>
-      <div class="select">
-        <%= f.select :relationship_status, User.relationship_statuses.keys, value: current_user.relationship_status %>
+  <div class="message is-primary">
+    <div class="message-header">
+      About You
+    </div>
+
+    <div class="message-body">
+      <div class="field">
+        <%= f.label :biography %>
+        <%= f.text_area :biography, 
+          class: 'textarea',
+          value: current_user.biography
+        %>
+      </div>
+
+      <div class="field">
+        <%= f.label :interests %>
+        <%= f.text_area :interests,
+          class: 'textarea',
+          value: current_user.interests
+        %>
       </div>
     </div>
   </div>
 
-  <div class="subtitle is-4">Social Media</div>
-
-  <div class="field">
-    <%= f.label :facebook, class: 'subtitle' %>
-    <div class="control has-icons-left">
-      <span class="icon is-small is-left">
-        <i class="fab fa-facebook"></i>
-      </span>
-      <%= f.text_field :facebook, class: 'input', value: current_user.facebook %>
+  <div class="message is-primary">
+    <div class="message-header">
+      Social Media
     </div>
-  </div>
 
-  <div class="field">
-    <%= f.label :twitter, class: 'subtitle' %>
-    <div class="control has-icons-left">
-      <span class="icon is-small is-left">
-        <i class="fab fa-twitter"></i>
-      </span>
-      <%= f.text_field :twitter, class: 'input', value: current_user.twitter %>
-    </div>
-  </div>
+    <div class="message-body">
+      <div class="field">
+        <%= f.label :facebook %>
+        <%= f.text_field :facebook, 
+          class: 'input',
+          icon: 'facebook',
+          icon_group: 'fab',
+          value: current_user.facebook
+        %>
+      </div>
 
-  <div class="field">
-    <%= f.label :discord, class: 'subtitle' %>
-    <div class="control has-icons-left">
-      <span class="icon is-small is-left">
-        <i class="fab fa-discord"></i>
-      </span>
-      <%= f.text_field :discord, class: 'input', value: current_user.discord %>
+      <div class="field">
+        <%= f.label :twitter %>
+        <%= f.text_field :twitter, 
+          class: 'input',
+          icon: 'twitter',
+          icon_group: 'fab',
+          value: current_user.twitter
+        %>
+      </div>
+
+      <div class="field">
+        <%= f.label :discord %>
+        <%= f.text_field :discord,
+          class: 'input', 
+          icon: 'discord',
+          icon_group: 'fab',
+          value: current_user.discord
+        %>
+      </div>
     </div>
   </div>
 
