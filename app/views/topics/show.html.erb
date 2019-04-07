@@ -3,9 +3,14 @@
 <% modal(title: 'Topic Actions') do %>
   <%= react_component('TopicActions',
     topicID: @topic.id,
+    currentUserID: current_user&.id,
     currentAdmin: current_admin?,
     authenticity_token: form_authenticity_token,
     isLocked: @topic.locked?,
+
+    nudge: {
+      nudgeEndpoint: api_nudge_topic_path,
+    },
 
     lock: {
       lockEndpoint: api_lock_topic_path,

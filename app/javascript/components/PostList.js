@@ -30,30 +30,42 @@ class PostList extends React.Component {
       {
         received(data) {
           switch(data.type) {
-            case 'post':
+            case 'post': {
               component.appendPost(data.post);
               component.removeTypingUser(data.post.username);
               break;
+            }
             
-            case 'post_edit':
+            case 'post_edit': {
               component.updatePostWithEdits(data.post);
               break;
+            }
 
-            case 'started_typing':
+            case 'started_typing': {
               component.addTypingUser(data.username);
               break;
+            }
           
-            case 'stopped_typing':
+            case 'stopped_typing': {
               component.removeTypingUser(data.username);
               break;
+            }
 
-            case 'lock':
+            case 'lock': {
               component.setLocked(true);
               break;
+            }
 
-            case 'unlock':
+            case 'unlock': {
               component.setLocked(false);
               break;
+            }
+
+            case 'nudge': {
+              $('body').effect('shake', { distance: 100 });
+              component.appendPost(data.post);
+              break;
+            }
           }
         },
 
@@ -103,7 +115,7 @@ class PostList extends React.Component {
           {posts}
         </div>
 
-        <When condition={typingNotif}>
+        <When condition={!!typingNotif }>
           <div className={`typing-notif tag is-medium is-${this.props.topicColor}`}>
             {typingNotif}
           </div>

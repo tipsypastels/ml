@@ -55,7 +55,7 @@ class TopicActions extends React.Component {
 
         <ul className="menu-list">
           <li>
-            <a>
+            <a data-modal="close" onClick={this.nudge}>
               <span className="icon is-small">
                 <i className="fa fa-heartbeat" />
               </span>
@@ -161,6 +161,18 @@ class TopicActions extends React.Component {
         {this.props.currentAdmin ? adminActions : null}
       </aside>
     );
+  }
+
+  nudge = () => {
+    axios({
+      method: 'post',
+      url: this.props.nudge.nudgeEndpoint,
+      data: {
+        authenticity_token: this.props.authenticity_token,
+        topic_id: this.props.topicID,
+        user_id: this.props.currentUserID,
+      }
+    })
   }
 
   setLocked = (isLocked) => {

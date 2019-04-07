@@ -8,7 +8,12 @@ class NewPostBroadcaster
   end
 
   def broadcast
-    post_json = PostSerializer.new(@post).serializable_hash
+    post_json = 
+      if @post.is_a?(Hash)
+        @post
+      else
+        PostSerializer.new(@post).serializable_hash
+      end
 
     ActionCable.server.broadcast(
       "topic_channel_#{@post.topic_id}", 

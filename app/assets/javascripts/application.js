@@ -15,4 +15,5 @@
 //= require turbolinks
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui/effects/effect-shake
 //= require_tree .

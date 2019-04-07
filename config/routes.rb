@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
     post '/locks/new', to: 'locks#create', as: :lock_topic
     delete '/locks', to: 'locks#destroy', as: :unlock_topic
+
+    post '/nudge/new', to: 'nudge#create', as: :nudge_topic
   end
 
   scope '/settings', as: :settings do
