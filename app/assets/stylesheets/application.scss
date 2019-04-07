@@ -1,6 +1,11 @@
 @import "bulma";
+@import "codemirror";
 @import "**/*";
 
 .media.media-centered {
   align-items: center;
+}
+
+.notification a {
+  text-decoration: none !important;
 }

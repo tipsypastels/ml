@@ -16,6 +16,10 @@ Rails.application.routes.draw do
     post '/save', to: 'user_settings#save', as: :save 
   end
 
+  get '/about', to: 'about#index', as: :about
+  get '/about/edit', to: 'about#edit', as: :edit_about
+  post '/about/edit', to: 'about#update', as: :update_about
+
   root to: 'topics#index'
 
   devise_for :users,

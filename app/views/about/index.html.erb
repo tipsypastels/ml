@@ -1,0 +1,23 @@
+<% @page_title = 'About Meteor Lens' %>
+
+<div class="notification is-primary level">
+  <div class="level-left">
+    <p class="title">
+      About Meteor Lens
+    </p>
+  </div>
+
+  <div class="level-right">
+    <% if current_admin? %>
+      <%= link_to update_about_path do %>
+        <div class="icon is-small">
+          <%= fa 'pencil-alt fa-lg' %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<div class="content">
+  <%= rp 'content' %>
+</div>

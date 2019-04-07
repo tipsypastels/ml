@@ -1,0 +1,27 @@
+<% @page_title = 'Editing About' %>
+
+<%= form_with(url: update_about_path, local: true, builder: MlFormBuilder) do |f| %>
+  <div class="message is-primary">
+    <div class="message-header">
+      Editing About (Use HTML)
+    </div>
+
+    <div class="message-body">
+      <div class="content">
+        It's probably better to edit this field in the project filesystem (<pre style="display: inline; padding: 0.5em;">app/views/about/_content.html</pre>) but this option exists for quick corrections. Edits will be saved to the file.
+      </div>
+
+      <div class="field">
+        <%= f.text_area :content,
+          class: 'textarea',
+          value: @content,
+          rows: 25
+        %>
+      </div>
+
+      <div class="field">
+        <%= f.submit class: 'button is-primary' %>
+      </div>
+    </div>
+  </div>
+<% end %>
