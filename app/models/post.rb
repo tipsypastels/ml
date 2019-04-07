@@ -14,4 +14,8 @@ class Post < ApplicationRecord
   def op?
     user == topic.user
   end
+
+  def status?
+    is_status
+  end
 end

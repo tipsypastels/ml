@@ -3,6 +3,7 @@ import axios from 'axios';
 import { If, Then, Else } from 'react-if';
 
 import Lock from './topicActions/Lock';
+import Unlock from './topicActions/Unlock';
 
 class TopicActions extends React.Component {
   constructor(props) {
@@ -25,6 +26,18 @@ class TopicActions extends React.Component {
             {...this.props.lock}
           />
         );
+      }
+
+      case 'unlock': {
+        return (
+          <Unlock
+            clearAction={this.clearAction}
+            setLocked={this.setLocked}
+            topicID={this.props.topicID}
+            authenticity_token={this.props.authenticity_token}
+            {...this.props.lock}
+          />
+        )
       }
 
       default: {
@@ -96,7 +109,7 @@ class TopicActions extends React.Component {
           <li>
             <If condition={this.state.isLocked}>
               <Then>
-                <a onClick={this.unlockTopic}>
+                <a onClick={() => this.setState({ action: 'unlock' })}>
                   <span className="icon is-small">
                     <i className="fa fa-unlock" />
                   </span>
@@ -148,19 +161,6 @@ class TopicActions extends React.Component {
         {this.props.currentAdmin ? adminActions : null}
       </aside>
     );
-  }
-
-  unlockTopic = () => {
-    axios({
-      method: 'delete',
-      url: this.props.lock.unlockEndpoint,
-      data: {
-        topic_id: this.props.topicID,
-        authenticity_token: this.props.authenticity_token,
-      }
-    }).then(({ data }) => {
-      this.setLocked(data.locked);
-    });
   }
 
   setLocked = (isLocked) => {

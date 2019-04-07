@@ -3,18 +3,18 @@ class Api::PostsController < ApplicationController
 
   def create
     post = Post.new(post_params)
+
+    if post.topic.locked? && !current_admin? 
+      render json: { response: 403, error: 'Locked' }
+      return
+    end
+
     post.user = current_user
     post.admin &&= current_user.admin?
 
     if post.save
-      post_json = PostSerializer.new(post).serializable_hash
-      render json: { post: post_json }
-
-      ActionCable.server.broadcast(
-        "topic_channel_#{post.topic_id}", 
-        type: 'post',
-        post: post_json,
-      )
+      NewPostBroadcaster.broadcast(post)
+      render json: { response: :ok } 
     else
       render json: { errors: post.errors.full_messages }
     end

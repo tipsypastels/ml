@@ -36,4 +36,8 @@ class Topic < ApplicationRecord
   def locked?
     lock_reason.present?
   end
+
+  def unlocked?
+    !locked?
+  end
 end

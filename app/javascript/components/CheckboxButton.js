@@ -14,12 +14,13 @@ export default function(props) {
 
   return (
     <label 
-      className={`button is-${buttonClass}`}
+      className={`button is-${buttonClass} ${props.className}`}
       onChange={props.onChange}
     >
       <input 
         style={{ display: 'none' }}
         type="checkbox" 
+        defaultChecked={props.active}
       />
       <span className="icon is-small">
         <i className={`fas fa-${iconClass}`} />

@@ -7,7 +7,11 @@ module UsersHelper
     HTML
   end
 
-  def can_post?
-    user_signed_in?
+  def can_post?(topic = nil)
+    if topic
+      user_signed_in? && (topic.unlocked? || current_admin?)
+    else
+      user_signed_in? # TODO banned
+    end
   end
 end

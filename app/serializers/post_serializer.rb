@@ -17,7 +17,8 @@ class PostSerializer < ActiveModel::Serializer
              :createdAt,
              :updatedAt,
              :everUpdated,
-             :topicColor
+             :topicColor,
+             :isStatus
   
   def markdownContent
     markdown_for post.content
@@ -56,5 +57,9 @@ class PostSerializer < ActiveModel::Serializer
 
   def topicColor
     color_for(post.topic)
+  end
+
+  def isStatus
+    post.status?
   end
 end

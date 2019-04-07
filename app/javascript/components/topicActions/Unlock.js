@@ -3,41 +3,25 @@ import axios from 'axios';
 
 import CheckboxButton from '../CheckboxButton';
 
-class Lock extends Component {
+export default class Unlock extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      reason: '',
-      update: true,
+      update: true,       
     };
   }
   
   render() {
     return (
       <form onSubmit={this.submit}>
-        <label className="label" htmlFor="lock-reason">
-          Lock
+        <label className="label">
+          Unlock
         </label>
 
         <div className="field has-addons">
-          <div className="control is-expanded has-icons-left">
-            <span className="icon is-small is-left">
-              <i className="fas fa-lock" />
-            </span>
-
-            <input
-              autoFocus
-              id="lock-reason"
+          <div className="control is-expanded">
+            <CheckboxButton
               className="input"
-              type="text"
-              value={this.state.reason}
-              onChange={(e) => this.setState({ reason: e.target.value })}
-              placeholder="Lock Reason"
-              />
-          </div>
-
-          <div className="control">
-            <CheckboxButton 
               active={this.state.update}
               onChange={(e) => this.setState({ update: e.target.checked })}
               passiveClass="light"
@@ -51,8 +35,7 @@ class Lock extends Component {
               autoFocus
               className="button is-primary"
               type="submit"
-              disabled={!(this.state.reason || !this.state.update)}
-              value="Lock"
+              value="Unlock"
             />
           </div>
 
@@ -65,18 +48,17 @@ class Lock extends Component {
           </div>
         </div>
       </form>
-     );
+    )
   }
 
   submit = (e) => {
     e.preventDefault();
 
     axios({
-      method: 'post',
-      url: this.props.lockEndpoint,
+      method: 'delete',
+      url: this.props.unlockEndpoint,
       data: {
         topic_id: this.props.topicID,
-        reason: this.state.reason,
         update: this.state.update,
         authenticity_token: this.props.authenticity_token,
       }
@@ -86,5 +68,3 @@ class Lock extends Component {
     });
   }
 }
-
-export default Lock;

@@ -1,8 +1,10 @@
 import React from "react";
 import unique from 'array-unique';
 import axios from "axios";
+import { If, Then, Else, When } from 'react-if';
 
 import Post from './Post';
+import StatusPost from './StatusPost';
 import PostReply from './PostReply';
 
 class PostList extends React.Component {
@@ -12,6 +14,7 @@ class PostList extends React.Component {
       posts: this.props.posts,
       typing: false,
       typingUsers: [],
+      canPost: this.props.canPost,
     };
   }
 
@@ -43,6 +46,14 @@ class PostList extends React.Component {
             case 'stopped_typing':
               component.removeTypingUser(data.username);
               break;
+
+            case 'lock':
+              component.setLocked(true);
+              break;
+
+            case 'unlock':
+              component.setLocked(false);
+              break;
           }
         },
 
@@ -65,14 +76,23 @@ class PostList extends React.Component {
 
   render () {
     const posts = this.state.posts.map(post => {
-      return (
-        <Post
-          key={post.id}
-          canEdit={this.props.currentUserID === post.user_id}
-          {...post}
-          submitEdits={this.submitEdits}
-        />
-      )
+      if (post.isStatus) {
+        return (
+          <StatusPost
+            {...post}
+            key={post.id}
+          />
+        );
+      } else {
+        return (
+          <Post
+            {...post}
+            key={post.id}
+            canEdit={this.props.currentUserID === post.user_id}
+            submitEdits={this.submitEdits}
+          />
+        );
+      }
     });
 
     const typingNotif = this.buildTypingNotif();
@@ -83,33 +103,39 @@ class PostList extends React.Component {
           {posts}
         </div>
 
-        {(() => {
-          if (typingNotif) {
-            return (
-              <div className={`typing-notif tag is-medium is-${this.props.topicColor}`}>
-                {typingNotif}
-              </div>
-            );
-          }
-        })()}
+        <When condition={typingNotif}>
+          <div className={`typing-notif tag is-medium is-${this.props.topicColor}`}>
+            {typingNotif}
+          </div>
+        </When>
 
-        {(() => {
-          if (this.props.canPost) {
-            return (
-              <div className="PostReply-container">
-                <PostReply
-                  topicID={this.props.topicID}
-                  newPostEndpoint={this.props.newPostEndpoint}
-                  authenticity_token={this.props.authenticity_token}
-                  appendPost={this.appendPost}
-                  sendTypingNotif={this.sendTypingNotif}
-                  topicColor={this.props.topicColor}
-                  currentAdmin={this.props.currentAdmin}
-                />
+        <If condition={this.state.canPost}>
+          <Then>
+            <div className="PostReply-container">
+              <PostReply
+                topicID={this.props.topicID}
+                newPostEndpoint={this.props.newPostEndpoint}
+                authenticity_token={this.props.authenticity_token}
+                appendPost={this.appendPost}
+                sendTypingNotif={this.sendTypingNotif}
+                topicColor={this.props.topicColor}
+                currentAdmin={this.props.currentAdmin}
+              />
+            </div>
+          </Then>
+
+          <Else>
+            <div className={`PostReplyLocked message is-${this.props.topicColor}`}>
+              <div className="message-header">
+                Posting in this topic is unavailable
               </div>
-            );
-          }
-        })()}
+
+              <div className="message-body">
+                Please try again later!
+              </div>
+            </div>
+          </Else>
+        </If>
       </div>
     );
   }
@@ -158,6 +184,11 @@ class PostList extends React.Component {
 
   appendPost = (post) => {
     this.setState({ posts: [...this.state.posts, post] });
+  }
+
+  setLocked = (locked) => {
+    const canPost = !locked || this.props.currentAdmin;
+    this.setState({ canPost });
   }
 
   submitEdits = ({ postID, content,})  => {

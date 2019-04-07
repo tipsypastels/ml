@@ -14,10 +14,6 @@
   ) %>
 <% end %>
 
-<% if @topic.locked? %>
-  locked!
-<% end %>
-
 <div class="topic-header level notification is-<%= color_for(@topic) %>">
   <div class="level-left">
     <div>
@@ -41,7 +37,7 @@
 <%= react_component('PostList',
   topicID: @topic.id,
   posts: @posts_json,
-  canPost: can_post?,
+  canPost: can_post?(@topic),
   topicColor: color_for(@topic),
 
   currentUsername: current_username,
