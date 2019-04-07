@@ -1,22 +1,28 @@
 <% @page_title = @topic.title_squeezed %>
 
 <% modal(title: 'Topic Actions') do %>
-  <%= react_component('TopicActions',
-    topicID: @topic.id,
-    currentUserID: current_user&.id,
-    currentAdmin: current_admin?,
-    authenticity_token: form_authenticity_token,
-    isLocked: @topic.locked?,
+  <% if user_signed_in? %>
+    <%= react_component('TopicActions',
+      topicID: @topic.id,
+      currentUserID: current_user&.id,
+      currentAdmin: current_admin?,
+      authenticity_token: form_authenticity_token,
+      isLocked: @topic.locked?,
 
-    nudge: {
-      nudgeEndpoint: api_nudge_topic_path,
-    },
+      nudge: {
+        nudgeEndpoint: api_nudge_topic_path,
+      },
 
-    lock: {
-      lockEndpoint: api_lock_topic_path,
-      unlockEndpoint: api_unlock_topic_path,
-    },
-  ) %>
+      lock: {
+        lockEndpoint: api_lock_topic_path,
+        unlockEndpoint: api_unlock_topic_path,
+      },
+
+      destroy: {
+        destroyEndpoint: api_destroy_topic_path(@topic.id),
+      }
+    ) %>
+  <% end %>
 <% end %>
 
 <div class="topic-header level notification is-<%= color_for(@topic) %>">
@@ -32,11 +38,13 @@
     </div>
   </div>
 
-  <div class="level-right">
-    <span class="icon" data-modal="toggle">
-      <%= fa 'bars fa-lg' %>
-    </span>
-  </div>
+  <% if user_signed_in? %>
+    <div class="level-right">
+      <span class="icon" data-modal="toggle">
+        <%= fa 'bars fa-lg' %>
+      </span>
+    </div>
+  <% end %>
 </div>
 
 <%= react_component('PostList',

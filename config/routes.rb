@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     delete '/locks', to: 'locks#destroy', as: :unlock_topic
 
     post '/nudge/new', to: 'nudge#create', as: :nudge_topic
+
+    delete '/deletetopic/:id', to: 'topic_destroy#destroy', as: :destroy_topic
   end
 
   scope '/settings', as: :settings do

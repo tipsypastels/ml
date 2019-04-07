@@ -4,6 +4,7 @@ import { If, Then, Else } from 'react-if';
 
 import Lock from './topicActions/Lock';
 import Unlock from './topicActions/Unlock';
+import Destroy from './topicActions/Destroy';
 
 class TopicActions extends React.Component {
   constructor(props) {
@@ -36,6 +37,15 @@ class TopicActions extends React.Component {
             topicID={this.props.topicID}
             authenticity_token={this.props.authenticity_token}
             {...this.props.lock}
+          />
+        )
+      }
+
+      case 'destroy': {
+        return (
+          <Destroy
+            clearAction={this.clearAction}
+            {...this.props.destroy}
           />
         )
       }
@@ -139,7 +149,7 @@ class TopicActions extends React.Component {
           </li>
 
           <li>
-            <a>
+            <a onClick={() => this.setState({ action: 'destroy' })}>
               <span className="icon is-small">
                 <i className="fa fa-trash-alt" />
               </span>
