@@ -1,11 +1,14 @@
 import React from "react";
 import axios from "axios";
 
+import CheckboxButton from './CheckboxButton';
+
 class PostReply extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       text: '',
+      admin: false,
     };
   }
 
@@ -28,14 +31,31 @@ class PostReply extends React.Component {
             onChange={this.updateText}
             value={this.state.text}
           />
-          <div className="flex">
-            <div className="grows"></div>
-            <input 
-              type="submit" 
-              value="Submit"
-              className={`button is-${this.props.topicColor}`}
-              disabled={!this.enableButton}
-            />
+          <div className="level">
+            <div className="level-left">
+              <input 
+                type="submit" 
+                value="Submit"
+                className={`button is-${this.props.topicColor}`}
+                disabled={!this.enableButton}
+              />
+            </div>
+
+            <div className="level-right">
+              {(() => {
+                if (this.props.currentAdmin) {
+                  return (
+                    <CheckboxButton
+                      active={this.state.admin}
+                      onChange={this.updateAdmin}
+                      activeClass={this.props.topicColor}
+                    >
+                      Post as Admin
+                    </CheckboxButton>
+                  );
+                }
+              })()}
+            </div>
           </div>
         </div>
       </form>
@@ -51,6 +71,10 @@ class PostReply extends React.Component {
     this.setState({ text: e.target.value });
   }
 
+  updateAdmin = (e) => {
+    this.setState({ admin: !this.state.admin });
+  }
+
   submitPost = (e) => {
     axios({
       method: 'post',
@@ -60,6 +84,7 @@ class PostReply extends React.Component {
         post: {
           topic_id: this.props.topicID,
           content: this.state.text,
+          admin: this.state.admin,
         }
       }
     }).then(() => {

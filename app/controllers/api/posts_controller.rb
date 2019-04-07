@@ -4,6 +4,7 @@ class Api::PostsController < ApplicationController
   def create
     post = Post.new(post_params)
     post.user = current_user
+    post.admin &&= current_user.admin?
 
     if post.save
       post_json = PostSerializer.new(post).serializable_hash
@@ -44,6 +45,6 @@ class Api::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:topic_id, :content)
+    params.require(:post).permit(:topic_id, :content, :admin)
   end
 end

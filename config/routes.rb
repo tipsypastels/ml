@@ -5,6 +5,9 @@ Rails.application.routes.draw do
 
     post '/posts/new', to: 'posts#create', as: :new_post
     post '/posts/edit', to: 'posts#update', as: :edit_post
+
+    post '/locks/new', to: 'locks#create', as: :lock_topic
+    delete '/locks', to: 'locks#destroy', as: :unlock_topic
   end
 
   scope '/settings', as: :settings do

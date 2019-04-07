@@ -4,6 +4,12 @@
       <span class="icon is-large has-text-primary">
         <%= fa 'meteor', class: 'fa-2x' %>
       </span>
+
+      <div class="button is-primary">
+        <strong>
+          ML
+        </strong>
+      </div>
     <% end %>
 
     <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -16,8 +22,10 @@
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
       <% if user_signed_in? %>
-        <%= link_to 'New Topic', new_topic_path, class: 'button is-primary' %>
+        <%= link_to 'New Topic', new_topic_path, class: 'navbar-item' %>
       <% end %>
+
+      <%= link_to 'Users', users_path, class: 'navbar-item' %>
     </div>
 
     <div class="navbar-end">

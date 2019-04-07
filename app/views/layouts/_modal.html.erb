@@ -1,0 +1,16 @@
+<% if content_for?(:modal) %>
+  <div class="modal" id="modal">
+    <div class="modal-background" data-modal="close"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">
+          <%= @modal_title %>
+        </p>
+        <button class="delete" data-modal="close" aria-label="close"></button>
+      </header>
+      <section class="modal-card-body">
+        <%= content_for :modal %>
+      </section>
+    </div>
+  </div>
+<% end %>

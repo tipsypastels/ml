@@ -13,7 +13,8 @@
   </head>
 
   <body>
-    <%= render partial: 'layouts/header', locals: { page_title: @page_title } %>
+    <%= rp 'layouts/header', page_title: @page_title %>
+    <%= rp 'layouts/modal' %>
 
     <section class="section" id="page">
       <div class="container">

@@ -9,6 +9,16 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_user?
 
+  def current_admin?
+    current_user&.admin?
+  end
+  helper_method :current_admin?
+
+  def authenticate_admin!
+    redirect_to root_path unless current_admin?
+  end
+  helper_method :authenticate_admin!
+
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected

@@ -104,6 +104,7 @@ class PostList extends React.Component {
                   appendPost={this.appendPost}
                   sendTypingNotif={this.sendTypingNotif}
                   topicColor={this.props.topicColor}
+                  currentAdmin={this.props.currentAdmin}
                 />
               </div>
             );

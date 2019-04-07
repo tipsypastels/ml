@@ -32,4 +32,8 @@ class Topic < ApplicationRecord
   def likes_count
     0 # TODO
   end
+
+  def locked?
+    lock_reason.present?
+  end
 end

@@ -36,6 +36,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 gem "bulma-rails", "~> 0.7.4"
+gem 'jquery-rails'
 
 gem 'webpacker'
 gem 'react-rails'

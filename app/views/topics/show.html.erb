@@ -1,23 +1,54 @@
 <% @page_title = @topic.title_squeezed %>
 
-<div class="topic-header notification is-<%= color_for(@topic) %>">
-  <p class="title">
-    <%= @topic.title %>
-  </p>
+<% modal(title: 'Topic Actions') do %>
+  <%= react_component('TopicActions',
+    topicID: @topic.id,
+    currentAdmin: current_admin?,
+    authenticity_token: form_authenticity_token,
+    isLocked: @topic.locked?,
 
-  <p class="subtitle">
-    <%= @topic.reading_time(format: :approx) %> reading time
-  </p>
+    lock: {
+      lockEndpoint: api_lock_topic_path,
+      unlockEndpoint: api_unlock_topic_path,
+    },
+  ) %>
+<% end %>
+
+<% if @topic.locked? %>
+  locked!
+<% end %>
+
+<div class="topic-header level notification is-<%= color_for(@topic) %>">
+  <div class="level-left">
+    <div>
+      <p class="title">
+        <%= @topic.title %>
+      </p>
+
+      <p class="subtitle">
+        <%= @topic.reading_time(format: :approx) %> reading time
+      </p>
+    </div>
+  </div>
+
+  <div class="level-right">
+    <span class="icon" data-modal="toggle">
+      <%= fa 'bars fa-lg' %>
+    </span>
+  </div>
 </div>
 
 <%= react_component('PostList',
   topicID: @topic.id,
   posts: @posts_json,
   canPost: can_post?,
+  topicColor: color_for(@topic),
+
   currentUsername: current_username,
   currentUserID: current_user&.id,
+  currentAdmin: current_admin?,
+
   newPostEndpoint: api_new_post_path,
   editPostEndpoint: api_edit_post_path,
-  topicColor: color_for(@topic),
   authenticity_token: form_authenticity_token,
 ) %>

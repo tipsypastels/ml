@@ -14,8 +14,4 @@ class Post < ApplicationRecord
   def op?
     user == topic.user
   end
-
-  def admin?
-    false # TODO
-  end
 end

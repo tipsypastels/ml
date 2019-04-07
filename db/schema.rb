@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_31_223962) do
+ActiveRecord::Schema.define(version: 2019_04_07_001716) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 2019_03_31_223962) do
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "admin", default: false
   end
 
   create_table "taggings", force: :cascade do |t|
@@ -87,6 +88,7 @@ ActiveRecord::Schema.define(version: 2019_03_31_223962) do
     t.datetime "updated_at", null: false
     t.string "slug"
     t.integer "posts_count", default: 0
+    t.string "lock_reason"
     t.index ["slug"], name: "index_topics_on_slug", unique: true
   end
 
@@ -111,6 +113,7 @@ ActiveRecord::Schema.define(version: 2019_03_31_223962) do
     t.string "twitter"
     t.text "interests"
     t.string "discord"
+    t.boolean "admin", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
