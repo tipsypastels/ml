@@ -35,6 +35,10 @@ class Post < ApplicationRecord
     user == topic.user
   end
 
+  def first?
+    topic.posts.first.id == id
+  end
+
   def status?
     is_status
   end

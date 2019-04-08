@@ -2,7 +2,13 @@
   <div class="message-header">
     <div>
       <%= link_to post.username, post.user %>
-      posted in topic
+      
+      <% if post.first? %>
+        created topic
+      <% else %>
+        posted in topic
+      <% end %>
+
       <%= link_to post.topic.title, post.topic %>
 
       <% if post.topic.club %>
@@ -19,7 +25,7 @@
       </div>
 
       <div class="icon huge-icon column is-one-fifth has-text-<%= color_for(post.topic) %> has-text-centered">
-        <%= fa 'arrow-right' %>
+        <%= fa(post.first? ? 'plus' : 'arrow-right') %>
       </div>
 
       <div class="column no-padding-left flex flex-center">
