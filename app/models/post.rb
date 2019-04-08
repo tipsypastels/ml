@@ -1,7 +1,7 @@
 class Post < ApplicationRecord
-  default_scope do
+  scope :ordered, -> {
     where(is_status: false).order(created_at: :desc)
-  end
+  }
 
   scope :with_standalone_includes, -> {
     includes(:topic, :user, topic: :club)

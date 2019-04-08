@@ -6,13 +6,15 @@ class PostsController < ApplicationController
 
   private
 
+  ACTIVITY_COUNT = 25
+
   def post_scope
     if current_admin?
-      Post.all
+      Post.ordered.limit(25)
     elsif user_signed_in?
-      Post.scoped_to(current_user)
+      Post.ordered.limit(25).scoped_to(current_user)
     else
-      Post.global_or_public_clubs
+      Post.ordered.limit(25).global_or_public_clubs
     end
   end
 end
