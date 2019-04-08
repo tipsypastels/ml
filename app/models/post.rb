@@ -28,7 +28,7 @@ class Post < ApplicationRecord
   delegate :reading_time, to: :content
 
   def ever_updated?
-    created_at == updated_at
+    updated_at > created_at
   end
 
   def op?

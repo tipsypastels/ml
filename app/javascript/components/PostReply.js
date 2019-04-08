@@ -6,6 +6,7 @@ import CheckboxButton from './CheckboxButton';
 class PostReply extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
       text: '',
       admin: false,

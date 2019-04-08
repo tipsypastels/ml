@@ -210,6 +210,7 @@ class PostList extends React.Component {
         authenticity_token,
         content,
         id: postID,
+        topic_id: this.props.topicID,
       }
     });
   }
