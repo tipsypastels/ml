@@ -36,7 +36,7 @@ class Post < ApplicationRecord
   end
 
   def first?
-    topic.posts.first.id == id
+    topic.first_post_id == id
   end
 
   def status?

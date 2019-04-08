@@ -21,6 +21,10 @@ class Topic < ApplicationRecord
 
   delegate :username, to: :user
 
+  def first_post_id
+    posts.limit(1).first&.id
+  end
+
   TITLE_SQUEEZE_LENGTH = 27
 
   def title_squeezed
