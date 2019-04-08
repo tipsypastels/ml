@@ -16,7 +16,7 @@ class Api::FollowsController < ApplicationController
   private
 
   def find_user
-    @user = User.friendly.find(params[:id])
+    @user = User.unscoped.friendly.find(params[:id])
   end
 
   def not_self

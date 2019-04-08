@@ -5,12 +5,12 @@
 
 <div class="topic-group tile is-ancestor">
   <div class="tile is-6 is-parent">
-    <%= rp 'topic_tile', topic: main %>
+    <%= rp 'topics/topic_tile', topic: main %>
   </div>
 
   <div class="tile is-vertical is-parent">
     <% others.each do |topic| %>
-      <%= rp 'topic_tile', topic: topic %>
+      <%= rp 'topics/topic_tile', topic: topic %>
     <% end %>
   </div>
 </div>

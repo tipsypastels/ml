@@ -25,6 +25,20 @@
   <% end %>
 <% end %>
 
+<% if @topic.club %>
+  <div class="notification is-<%= color_for(@topic) %>">
+    <span>
+      This topic is in a club:
+    </span>
+
+    <%= link_to @topic.club do %>
+      <strong>
+        <%= @topic.club.title %>
+      </strong>
+    <% end %>
+  </div>
+<% end %>
+
 <div class="topic-header level notification is-<%= color_for(@topic) %>">
   <div class="level-left">
     <div>

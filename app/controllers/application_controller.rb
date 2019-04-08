@@ -14,6 +14,11 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_admin?
 
+  def current_club_member?(club)
+    current_user&.in_club?(club)
+  end
+  helper_method :current_club_member?
+
   def authenticate_admin!
     redirect_to root_path unless current_admin?
   end

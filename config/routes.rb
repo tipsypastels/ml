@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     post '/nudge/new', to: 'nudge#create', as: :nudge_topic
 
     delete '/deletetopic/:id', to: 'topic_destroy#destroy', as: :destroy_topic
+
+    post '/herosearch', to: 'hero_search#search', as: :hero_search
   end
 
   scope '/settings', as: :settings do
@@ -37,6 +39,10 @@ Rails.application.routes.draw do
   get '/@:id', to: 'users#show', as: :user
 
   resources :topics
+
+  resources :clubs
+  get '/clubs/:id/new', to: 'club_topics#new', as: :new_club_topic
+  post '/clubs/:id/new', to: 'club_topics#create', as: :create_club_topic
 
   mount ActionCable.server => '/cable'
 end

@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= @page_title %> – Meteor Lens</title>
+    <title>
+      <% if @page_title %>
+        <%= @page_title %> – Meteor Lens
+      <% else %>
+        Meteor Lens
+      <% end %>
+    </title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -15,6 +21,7 @@
   <body>
     <%= rp 'layouts/header', page_title: @page_title %>
     <%= rp 'layouts/modal' %>
+    <%= rp 'layouts/hero' if false %>
 
     <section class="section" id="page">
       <div class="container">

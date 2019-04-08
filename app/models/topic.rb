@@ -3,6 +3,10 @@ class Topic < ApplicationRecord
     order(updated_at: :desc)
   end
 
+  scope :without_clubs, -> {
+    where(club_id: nil)
+  }
+
   acts_as_taggable
 
   extend FriendlyId
@@ -10,6 +14,8 @@ class Topic < ApplicationRecord
   
   has_many :posts, dependent: :destroy
   belongs_to :user, counter_cache: true
+
+  belongs_to :club, optional: true, touch: true
   
   validates :title, presence: true
 

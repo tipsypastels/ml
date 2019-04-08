@@ -32,12 +32,3 @@ export default function(props) {
     </label>
   );
 }
-
-/*
-<label className="button is-success">
-      <span className="icon is-small">
-        <i className="fas fa-check" />
-      </span>
-      <span>Save</span>
-    </label>
-    */

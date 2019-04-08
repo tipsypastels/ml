@@ -1,0 +1,47 @@
+<% modal(title: 'Club Actions') do %>
+  yo
+<% end %>
+
+<div class="club-header level notification is-primary">
+  <div class="level-left">
+    <div>
+      <p class="title">
+        <%= @club.title %>
+      </p>
+
+      <p class="subtitle">
+        <%= @club.description %>
+      </p>
+    </div>
+  </div>
+
+  <% if user_signed_in? %>
+    <div class="level-right">
+      <span class="icon" data-modal="toggle">
+        <%= fa 'bars fa-lg' %>
+      </span>
+    </div>
+  <% end %>
+</div>
+
+<div class="level">
+  <div class="level-left">
+    <p class="title is-4">
+      Club Topics
+    </p>
+  </div>
+
+  <div class="level-right">
+    <% if current_club_member?(@club) %>
+      <%= link_to 'New Topic', new_club_topic_path, class: 'button is-primary' %>
+    <% end %>
+  </div>  
+</div>
+
+<div class="topic-groups">
+  <% cache @topics do %>
+    <% @topics.each_slice(3) do |topics| %>
+      <%= rp 'topics/topics_batch', topics: topics %>
+    <% end %>
+  <% end %>
+</div>

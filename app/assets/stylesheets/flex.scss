@@ -1,5 +1,5 @@
 .flex {
-  display: flex;
+  display: flex !important;
 }
 
 .flex-column {
@@ -8,4 +8,8 @@
 
 .flex-grows {
   flex-grow: 1;
+}
+
+.flex-center {
+  align-items: center;
 }

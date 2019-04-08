@@ -5,6 +5,8 @@ class Api::NudgeController < ApplicationController
     @topic = Topic.find(params[:topic_id])
     @user  = User.find(params[:user_id])
 
+    @topic.touch
+
     ActionCable.server.broadcast(
       "topic_channel_#{@topic.id}",
       type: 'nudge',

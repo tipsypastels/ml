@@ -1,0 +1,25 @@
+<% @page_title = 'New Topic' %>
+
+<%= form_with(url: create_club_topic_path, class: 'message is-primary', builder: MlFormBuilder) do |form| %>
+  <div class="message-header">
+    Creating a new topic in <%= @club.title %>...
+  </div>
+
+  <div class="message-body">
+    <div class="field">
+      <%= form.text_field :title, class: 'input', placeholder: 'Title', icon: 'signature', autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= form.text_area :content, class: 'textarea', placeholder: 'Content'  %>
+    </div>
+
+    <div class="field">
+      <%= form.text_field :tag_list, class: 'input', placeholder: '(Optional) Thread Tags', icon: 'tags' %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit class: 'button is-primary' %>
+    </div>
+  </div>
+<% end %>

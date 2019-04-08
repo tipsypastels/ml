@@ -16,6 +16,10 @@ class User < ApplicationRecord
 
   has_many :topics, dependent: :destroy
   has_many :posts, dependent: :destroy
+
+  has_many :club_memberships
+  has_many :clubs, through: :club_memberships
+
   has_one_attached :avatar
 
   acts_as_followable
@@ -63,5 +67,9 @@ class User < ApplicationRecord
   def set_default_avatar(force: false)
     return if avatar.attached? && !force
     avatar.attach(io: File.open(DEFAULT_AVATAR_PATH), filename: 'avatar.jpg')
+  end
+
+  def in_club?(club)
+    clubs.include?(club)
   end
 end
