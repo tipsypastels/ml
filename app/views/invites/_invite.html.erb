@@ -1,0 +1,17 @@
+<tr>
+  <td>
+    <%= link_to invite.username, invite.user %>
+  </td>
+
+  <td>
+    TODO
+  </td>
+
+  <td>
+    <%= invite.uses %>
+  </td>
+
+  <td>
+    <input class="input" data-copy type="text" value="<%= request.base_url %>/invites/<%= invite.hex %>">
+  </td>
+</tr>

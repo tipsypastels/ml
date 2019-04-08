@@ -5,7 +5,7 @@
     <%= react_component('TopicActions',
       topicID: @topic.id,
       currentUserID: current_user&.id,
-      currentAdmin: current_admin?,
+      canModerate: topic_permissions(@topic).can_moderate?,
       authenticity_token: form_authenticity_token,
       isLocked: @topic.locked?,
 
@@ -25,16 +25,32 @@
   <% end %>
 <% end %>
 
-<% if @topic.club %>
+<% if @topic.club? %>
   <div class="notification is-<%= color_for(@topic) %>">
-    <span>
-      This topic is in a club:
-    </span>
+    <% if topic_permissions(@topic).post_permissions == :not_club_member_but_admin %>
+      <span>
+        This topic is in a private club that you are not a member of:
+      </span>
 
-    <%= link_to @topic.club do %>
-      <strong>
-        <%= @topic.club.title %>
-      </strong>
+      <%= link_to @topic.club do %>
+        <strong>
+          <%= @topic.club.title %>.
+        </strong>
+      <% end %>
+
+      <span>
+        You may wish to avoid posting.
+      </span>
+    <% else %>
+      <span>
+        This topic is in a club:
+      </span>
+
+      <%= link_to @topic.club do %>
+        <strong>
+          <%= @topic.club.title %>
+        </strong>
+      <% end %>
     <% end %>
   </div>
 <% end %>
@@ -64,8 +80,10 @@
 <%= react_component('PostList',
   topicID: @topic.id,
   posts: @posts_json,
-  canPost: can_post?(@topic),
   topicColor: color_for(@topic),
+  
+  canPost: can_post?(@topic),
+  topicPermissions: topic_permissions(@topic).post_permissions,
 
   currentUsername: current_username,
   currentUserID: current_user&.id,
@@ -73,5 +91,10 @@
 
   newPostEndpoint: api_new_post_path,
   editPostEndpoint: api_edit_post_path,
+  
+  joinClubEndpoint: @topic.club? && new_club_membership_path(@topic.club),
+  registerEndpoint: new_user_registration_path,
+
   authenticity_token: form_authenticity_token,
+
 ) %>

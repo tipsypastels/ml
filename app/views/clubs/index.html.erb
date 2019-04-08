@@ -1,14 +1,4 @@
-<div class="notification is-danger">
-  <strong>
-    Note:
-  </strong>
-
-  <span>
-    You will auto-join any club you visit. Later a proper join system will be added.
-  </span>
-</div>
-
-<% if can_post? %>
+<% if can_create? %>
   <div class="message is-primary">
     <div class="message-header">
       Want a club of your own?
@@ -20,24 +10,8 @@
   </div>
 <% end %>
 
-<div class="message is-primary">
-  <div class="message-header">
-    Public Club List
-  </div>
+<% if in_any_clubs? %>
+  <%= rp 'club_list', title: 'Your Clubs', clubs: current_user.clubs %>
+<% end %>
 
-  <div class="message-body">
-    <table class="table is-striped is-fullwidth">
-      <thead>
-        <tr>
-          <th width="40%">Club Name</th>
-          <th width="10%">Member Count</th>
-          <th width="10%">Last Updated</th>
-        <tr>
-      </thead>
-      <tbody>
-        <%= render @clubs %>
-      </tbody>
-    </table>
-  </div>
-</div>
-
+<%= rp 'club_list', title: 'Discover Clubs', clubs: @clubs %>

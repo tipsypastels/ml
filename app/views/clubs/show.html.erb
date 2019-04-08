@@ -1,6 +1,28 @@
-<% modal(title: 'Club Actions') do %>
-  yo
+<% if club_permissions(@club).club_moderator? %>
+  <% modal(title: 'Club Actions') do %>
+    <aside class="menu">
+      <p class="menu-label">
+        Members
+      </p>
+
+      <ul class="menu-list">
+        <li>
+          <%= link_to invites_path(@club) do %>
+            <span class="icon is-small">
+              <%= fa 'user-plus' %>
+            </span>
+
+            <span>
+              Manage Invites
+            </span>
+          <% end %>
+        </li>
+      </ul>
+    </aside>
+  <% end %>
 <% end %>
+
+<%= rp 'clubs/join_tip' %>
 
 <div class="club-header level notification is-primary">
   <div class="level-left">
@@ -28,12 +50,22 @@
   <div class="level-left">
     <p class="title is-4">
       Club Topics
+
+      <%= link_to club_members_path(@club), class: "has-text-grey-light" do %>
+        / Club Members
+      <% end %>
     </p>
   </div>
 
   <div class="level-right">
     <% if current_club_member?(@club) %>
       <%= link_to 'New Topic', new_club_topic_path, class: 'button is-primary' %>
+    <% elsif @can_join %>
+      <%= link_to 'Join Club', new_club_membership_path, class: 'button is-primary'%>
+    <% else %>
+      <button style="visibility: hidden" class="button is-light">
+        (Balancer)
+      </button>
     <% end %>
   </div>  
 </div>

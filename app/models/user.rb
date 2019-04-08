@@ -69,7 +69,16 @@ class User < ApplicationRecord
     avatar.attach(io: File.open(DEFAULT_AVATAR_PATH), filename: 'avatar.jpg')
   end
 
-  def in_club?(club)
+  def club?(club)
     clubs.include?(club)
+  end
+
+  def moderates?(club)
+    return false unless club
+    club.moderators.include?(self)
+  end
+
+  def banned?
+    false
   end
 end

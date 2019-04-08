@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_08_034113) do
+ActiveRecord::Schema.define(version: 2019_04_08_181422) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2019_04_08_034113) do
   create_table "club_memberships", force: :cascade do |t|
     t.integer "user_id"
     t.integer "club_id"
-    t.boolean "admin", default: false
+    t.boolean "moderator", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -63,6 +63,16 @@ ActiveRecord::Schema.define(version: 2019_04_08_034113) do
     t.index ["followable_type", "followable_id"], name: "index_follows_on_followable_type_and_followable_id"
     t.index ["follower_id", "follower_type"], name: "fk_follows"
     t.index ["follower_type", "follower_id"], name: "index_follows_on_follower_type_and_follower_id"
+  end
+
+  create_table "invites", force: :cascade do |t|
+    t.integer "club_id"
+    t.integer "user_id"
+    t.integer "uses", default: 0
+    t.string "hex"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hex"], name: "index_invites_on_hex", unique: true
   end
 
   create_table "posts", force: :cascade do |t|

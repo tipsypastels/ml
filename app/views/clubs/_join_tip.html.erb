@@ -1,0 +1,27 @@
+<% if @can_join %>
+  <div class="notification is-light">
+    <%= link_to new_club_membership_path do %>
+      <span>
+        You are not a member of this club. You can gain posting access by
+      </span>
+
+      <strong>
+        joining it
+      </strong>
+
+      <span>
+        .
+      </span>
+    <% end %>
+  </div>
+<% elsif @admin_override %>
+  <div class="notification is-danger">
+    <span>
+      This is a private group that you are not a member of, and you are viewing it as an admin.
+    </span>
+
+    <strong>
+      You may wish to avoid posting.
+    </strong>
+  </div>
+<% end %>

@@ -1,7 +1,7 @@
 class ClubTopicsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_club
-  before_action :authenticate_club_member!
+  before_action :verify_can_post
 
   def new
     @topic = Topic.new
@@ -24,8 +24,8 @@ class ClubTopicsController < ApplicationController
     @club = Club.friendly.find(params[:id])
   end
 
-  def authenticate_club_member!
-    redirect_to root_path unless current_user.in_club?(@club)
+  def verify_can_post
+    redirect_to root_path unless can_create?(@club)
   end
 
   def club_topic_params

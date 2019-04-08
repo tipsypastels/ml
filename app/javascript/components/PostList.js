@@ -6,6 +6,7 @@ import { If, Then, Else, When } from 'react-if';
 import Post from './Post';
 import StatusPost from './StatusPost';
 import PostReply from './PostReply';
+import PostReplyDisabled from './PostReplyDisabled';
 
 class PostList extends React.Component {
   constructor(props) {
@@ -137,15 +138,12 @@ class PostList extends React.Component {
           </Then>
 
           <Else>
-            <div className={`PostReplyLocked message is-${this.props.topicColor}`}>
-              <div className="message-header">
-                Posting in this topic is unavailable
-              </div>
-
-              <div className="message-body">
-                Please try again later!
-              </div>
-            </div>
+            <PostReplyDisabled
+              topicColor={this.props.topicColor}
+              topicPermissions={this.props.topicPermissions}
+              joinClubEndpoint={this.props.joinClubEndpoint}
+              registerEndpoint={this.props.registerEndpoint}
+            />
           </Else>
         </If>
       </div>

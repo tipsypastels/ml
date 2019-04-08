@@ -1,8 +1,9 @@
 class Api::LocksController < ApplicationController
-  before_action :authenticate_admin!
   before_action :set_topic
+  before_action :authenticate_admin_or_club_moderator!
 
   def create
+    puts "\n\n\n\n#{params}\n\n\n\n"
     @topic.update(lock_reason: params[:reason])
 
     if params[:update]

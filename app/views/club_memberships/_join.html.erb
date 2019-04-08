@@ -1,0 +1,27 @@
+<%= form_with(url: endpoint, class: 'club-join message is-primary', builder: MlFormBuilder) do |form| %>
+  <%= yield(form) if block_given? %>
+  <div class="message-header">
+    Join <%= club.title %>?
+  </div>
+
+  <div class="message-body">
+    <div class="field columns">
+      <div class="column is-one-tenth">
+        <%= avatar_for current_user, size: '96x96' %>
+      </div>
+
+      <div class="icon huge-icon column is-one-fifth has-text-primary has-text-centered">
+        <%= fa 'arrow-right' %>
+      </div>
+
+      <div class="column no-padding-left">
+        <%= club_image_for club, size: '96x96' %>
+      </div>
+    </div>
+
+    <div class="actions field buttons has-text-centered">
+      <%= form.submit 'Sure', class: 'button is-primary' %>
+      <%= link_to 'Nah', club, class: 'button is-light' %>
+    </div>
+  </div>
+<% end %>

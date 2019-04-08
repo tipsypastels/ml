@@ -1,15 +1,32 @@
-<div class="post" data-post-id="<%= post.id %>">
-  <div class="post-header">
-    <%= link_to post.user, class: 'hidden flex v-center' do %>
-      <%= avatar_for(post.user, size: 'small') %>
+<div class="post-unscoped message is-<%= color_for(post.topic) %>">
+  <div class="message-header">
+    <div>
+      <%= link_to post.username, post.user %>
+      posted in topic
+      <%= link_to post.topic.title, post.topic %>
 
-      <div class="blackblock rot-small">
-        <%= post.username_at %>
-      </div>
-  <% end %>
+      <% if post.topic.club %>
+        in club
+        <%= link_to post.topic.club.title, post.topic.club %>
+      <% end %>
+    </div>
   </div>
 
-  <div class="post-body">
-    <%= post.content %>
+  <div class="message-body">
+    <div class="columns">
+      <div class="column is-one-tenth">
+        <%= avatar_for post.user, size: '96x96' %>
+      </div>
+
+      <div class="icon huge-icon column is-one-fifth has-text-<%= color_for(post.topic) %> has-text-centered">
+        <%= fa 'arrow-right' %>
+      </div>
+
+      <div class="column no-padding-left flex flex-center">
+        <div class="flex-grows notification is-<%= color_for(post.topic) %>">
+          <%= markdown_for post.content %>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

@@ -30,7 +30,7 @@ class StatusBuilder
     post = @topic.posts.create!(
       user: @user,
       is_status: true,
-      content: @content,
+      content: content,
     )
 
     NewPostBroadcaster.broadcast(post)

@@ -1,0 +1,59 @@
+<%= rp 'clubs/join_tip' %>
+
+<div class="club-header notification is-primary">
+  <div>
+    <p class="title">
+      <%= link_to @club.title, @club %>
+    </p>
+
+    <p class="subtitle">
+      <%= @club.description %>
+    </p>
+  </div>
+</div>
+
+<div class="level">
+  <div class="level-left">
+    <p class="title is-4">
+      <%= link_to @club, class: "has-text-grey-light" do %>
+        Club Topics /
+      <% end %>
+      
+      Club Members
+    </p>
+  </div>
+
+  <div class="level-right">
+    <% if @can_join %>
+      <%= link_to 'Join Club', new_club_membership_path, class: 'button is-primary'%>
+    <% elsif @can_invite %>
+      <%= link_to 'Invite People', new_invite_path(@club), class: 'button is-primary' %>
+    <% else %>
+      <button style="visibility: hidden" class="button is-light">
+        (Balancer)
+      </button>
+    <% end %>
+  </div>  
+</div>
+
+<% unless @club.moderators.empty? %>
+  <div class="section">
+    <p class="subtitle">
+      Club Moderators
+    </p>
+
+    <div class="user-list">
+      <%= rc 'users/user', @club.moderators %>
+    </div>
+  </div>
+<% end %>
+
+<div class="section">
+  <p class="subtitle">
+    Club Members
+  </p>
+
+  <div class="user-list">
+    <%= rc 'users/user', @club.regular_members %>
+  </div>
+</div>

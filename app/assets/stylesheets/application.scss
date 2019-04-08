@@ -1,3 +1,4 @@
+@import "bulma-vars";
 @import "bulma";
 @import "jquery-ui";
 @import "**/*";
@@ -13,4 +14,14 @@
 .hero-search {
   outline: none !important;
   border: none !important;
+}
+
+.column.is-avatar-sized {
+  flex: none;
+  width: 7%;
+}
+
+.column.is-one-tenth {
+  flex: none;
+  width: 10%;
 }

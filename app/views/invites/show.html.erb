@@ -1,0 +1,7 @@
+<div class="notification is-primary">
+  <strong><%= link_to @invite.username, @invite.user %></strong> has invited you to join <strong><%= link_to @invite.club_title, @invite.club %></strong>.
+</div>
+
+<%= rl 'club_memberships/join', club: @invite.club, endpoint: create_club_membership_path(@invite.club) do |form| %>
+  <%= form.hidden_field :hex, value: @invite.hex %>
+<% end %>

@@ -168,7 +168,7 @@ class TopicActions extends React.Component {
     return (
       <aside className="menu">
         {userActions}
-        {this.props.currentAdmin ? adminActions : null}
+        {this.props.canModerate ? adminActions : null}
       </aside>
     );
   }

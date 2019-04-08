@@ -1,0 +1,28 @@
+<div class="message is-primary">
+  <div class="message-header">
+    <%= title %>
+  </div>
+
+  <div class="message-body">
+    <table class="table is-striped is-fullwidth">
+      <thead>
+        <tr>
+          <th width="40%">
+            Club Name
+          </th>
+
+          <th width="10%" class="has-text-right">
+            Member Count
+          </th>
+          
+          <th width="10%" class="has-text-right">
+            Last Updated
+          </th>
+        <tr>
+      </thead>
+      <tbody>
+        <%= render clubs %>
+      </tbody>
+    </table>
+  </div>
+</div>

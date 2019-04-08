@@ -32,3 +32,14 @@
     text-decoration: none !important; 
   }
 }
+
+.post-unscoped {
+  .message-header {
+    font-weight: normal !important;
+
+    a {
+      font-weight: bold !important;
+      text-decoration: none !important;
+    }
+  }
+}

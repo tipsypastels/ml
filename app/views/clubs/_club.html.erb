@@ -1,13 +1,26 @@
 <tr>
   <td>
-    <%= link_to club.title, club %>
+    <div class="columns">
+      <div class="column is-avatar-sized">
+        <%= club_image_for club, size: '32x32' %>
+      </div>
+      <div class="column">
+        <%= link_to club.title, club %>
+
+        <% if club.vis_private? %>
+          <span class="tag is-light">
+            Private
+          </span>
+        <% end %>
+      </div>
+    </div>
   </td>
 
-  <td>
+  <td class="has-text-right">
     <%= club.users.count %>
   </td>
 
-  <td>
+  <td class="has-text-right">
     TODO
   </td>
 </tr>

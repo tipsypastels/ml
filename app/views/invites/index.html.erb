@@ -1,0 +1,30 @@
+<div class="section buttons">
+  <%= link_to 'New Invite', new_invite_path(@club), class: 'button is-primary' %>
+  <%= link_to 'Back to Club', @club, class: 'button is-light' %>
+</div>
+
+<table class="table is-striped is-fullwidth">
+  <thead>
+    <tr>
+      <th>
+        Creator
+      </th>
+
+      <th>
+        Created At
+      </th>
+
+      <th>
+        Uses
+      </th>
+
+      <th>
+        Link
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= rc 'invite', @invites %>
+  </tbody>
+</table>

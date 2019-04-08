@@ -1,5 +1,6 @@
 class Api::PostsController < ApplicationController
   before_action :authenticate_user!
+  before_action :verify_can_post
 
   def create
     post = Post.new(post_params)
@@ -46,5 +47,10 @@ class Api::PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:topic_id, :content, :admin)
+  end
+
+  def verify_can_post
+    topic = Topic.find(post_params[:topic_id])
+    redirect_to root_path unless topic_permissions(topic).can_post?
   end
 end

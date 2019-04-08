@@ -38,11 +38,26 @@ Rails.application.routes.draw do
   resources :users, only: :index
   get '/@:id', to: 'users#show', as: :user
 
+  get '/activity', to: 'posts#index', as: :activity
+
   resources :topics
 
   resources :clubs
   get '/clubs/:id/new', to: 'club_topics#new', as: :new_club_topic
   post '/clubs/:id/new', to: 'club_topics#create', as: :create_club_topic
+
+  get '/clubs/:id/members', to: 'club_memberships#show', as: :club_members
+  get '/clubs/:id/join', to: 'club_memberships#new', as: :new_club_membership
+  post '/clubs/:id/join', to: 'club_memberships#create', as: :create_club_membership
+
+  get '/clubs/:id/invites', to: 'invites#index', as: :invites
+  
+  get '/clubs/:id/invite', to: 'invites#new', as: :new_invite
+  post '/clubs/:id/invite', to: 'invites#create', as: :create_invite
+
+  get '/invites/:hex', to: 'invites#show', as: :invite
+
+  delete '/invites/:hex', to: 'invites#destroy', as: :destroy_invite
 
   mount ActionCable.server => '/cable'
 end

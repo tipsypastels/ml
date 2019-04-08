@@ -44,6 +44,18 @@ class Topic < ApplicationRecord
   end
 
   def unlocked?
-    !locked?
+    not locked?
+  end
+
+  def club?
+    club.present?
+  end
+
+  def global?
+    not club?
+  end
+
+  def private_club?
+    club? && club.vis_private?
   end
 end

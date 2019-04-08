@@ -1,0 +1,16 @@
+<%= form_with(url: create_invite_path(@club), local: true, class: 'message is-primary', builder: MlFormBuilder) do |form| %>
+  <div class="message-header">
+    Create an invite for <%= @club.title %>
+  </div>
+
+  <div class="message-body">
+    <div class="field">
+      Create an invite for this club? You can give the link to anyone you want to join, or revoke it later from the <%= link_to 'invites list', invites_path(@club) %>.
+    </div>
+
+    <div class="field buttons">
+      <%= form.submit 'Start Inviting', class: 'button is-primary' %>
+      <%= link_to 'Never Mind', @club, class: 'button is-light' %>
+    </div>
+  </div>
+<% end %>
