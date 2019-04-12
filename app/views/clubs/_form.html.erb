@@ -1,0 +1,67 @@
+<%= form_with(model: club, class: 'message is-primary', builder: MlFormBuilder) do |form| %>
+  <div class="message-header">
+    <%= title %>
+  </div>
+
+  <div class="message-body">
+    <div class="field">
+      <%= form.label :image %>
+      <%= form.file_field :image %>
+    </div>
+
+    <div class="field">
+      <%= form.label :title %>
+      <%= form.text_field :title,
+        class: 'input',
+        icon: 'signature',
+        autofocus: true,
+        :'data-show-on-edit' => 'update-slug',
+        :'data-unless-equal' => club.title
+      %>
+    </div>
+
+    <% if params[:action] == 'edit' %>
+      <div class="field" style="display: none" id="update-slug">
+        <label>
+          <%= form.check_box :update_slug %>
+          
+          <span>
+            Update URL? This will invalidate old links to your club.
+          </span>
+        </label>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.label :description %>
+      <%= form.text_area :description,
+        class: 'textarea'
+      %>
+    </div>
+
+    <div class="field">
+      <span class="label">
+        Visibility
+      </span>
+
+      <label>
+        <%= form.radio_button :visibility, :vis_public, checked: true %>
+        <span>
+          Public Club
+        </span>
+      </label>
+
+      <label>
+        <%= form.radio_button :visibility, :vis_private %>
+
+        <span>
+          Private Club
+        </span>
+      </label>
+    </div>
+
+    <div class="actions field">
+      <%= form.submit class: 'button is-primary' %>
+    </div>
+  </div>
+<% end %>

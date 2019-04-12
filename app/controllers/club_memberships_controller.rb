@@ -23,6 +23,15 @@ class ClubMembershipsController < ApplicationController
     end
   end
 
+  def destroy
+    ClubMembership.find_by(
+      user_id: current_user.id,
+      club_id: @club.id,
+    )&.destroy
+
+    redirect_to clubs_path
+  end
+
   private
 
   def set_club

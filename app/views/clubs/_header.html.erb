@@ -1,0 +1,75 @@
+<% if current_club_member?(club) %>
+  <% modal(title: 'Club Actions') do %>
+    <aside class="menu">
+      <p class="menu-label">
+        Leave
+      </p>
+
+      <ul class="menu-list">
+        <%= menu_li to: destroy_club_membership_path(@club), 
+                    text: 'Leave Club', 
+                    icon: 'sign-out-alt', 
+                    method: :delete 
+        %>
+      </ul>
+
+      <% if club_permissions(club).club_moderator? %>
+        <p class="menu-label">
+          Manage
+        </p>
+
+        <ul class="menu-list">
+          <li>
+            <%= link_to invites_path(club) do %>
+              <span class="icon is-small">
+                <%= fa 'user-plus' %>
+              </span>
+
+              <span>
+                Manage Invites
+              </span>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to edit_club_path(club) do %>
+              <span class="icon is-small">
+                <%= fa 'user-cog' %>
+              </span>
+
+              <span>
+                Edit Club
+              </span>
+            <% end %>
+          </li>
+        </ul>
+      <% end %>
+    </aside>
+  <% end %>
+<% end %>
+
+<%= rp 'clubs/join_tip',
+  can_join:       can_join,
+  admin_override: admin_override
+%>
+
+<div class="club-header level notification is-primary">
+  <div class="level-left">
+    <div>
+      <p class="title">
+        <%= club.title %>
+      </p>
+
+      <p class="subtitle">
+        <%= club.description %>
+      </p>
+    </div>
+  </div>
+
+  <% if current_club_member?(club) %>
+    <div class="level-right">
+      <span class="icon" data-modal="toggle">
+        <%= fa 'bars fa-lg' %>
+      </span>
+    </div>
+  <% end %>
+</div>

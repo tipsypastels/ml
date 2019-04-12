@@ -1,8 +1,9 @@
 class ClubsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_club, only: :show
+  before_action :set_club, only: [:show, :edit, :update]
   before_action :generate_club_join_tip, only: :show
   before_action :verify_private, only: :show
+  before_action :clear_slug_if_requested, only: :update
 
   def index
     @clubs = Club.public_clubs
@@ -14,6 +15,17 @@ class ClubsController < ApplicationController
 
   def show
     @topics = @club.topics.includes(:user, :tags)
+  end
+
+  def edit
+  end
+
+  def update
+    if @club.update(club_params)
+      redirect_to @club
+    else
+      render 'new'
+    end
   end
 
   def new
@@ -43,5 +55,12 @@ class ClubsController < ApplicationController
 
   def verify_private
     redirect_to root_path unless club_permissions(@club).can_view?
+  end
+
+  def clear_slug_if_requested
+    puts "\n\n\n#{params}\n\n\n"
+    if params[:club][:update_slug] == '1'
+      @club.slug = nil
+    end
   end
 end

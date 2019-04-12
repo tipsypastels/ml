@@ -1,16 +1,8 @@
-<%= rp 'clubs/join_tip' %>
-
-<div class="club-header notification is-primary">
-  <div>
-    <p class="title">
-      <%= link_to @club.title, @club %>
-    </p>
-
-    <p class="subtitle">
-      <%= @club.description %>
-    </p>
-  </div>
-</div>
+<%= rp 'clubs/header', 
+  club:           @club,
+  can_join:       @can_join,
+  admin_override: @admin_override
+%>
 
 <div class="level">
   <div class="level-left">

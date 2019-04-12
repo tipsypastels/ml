@@ -1,50 +1,8 @@
-<% if club_permissions(@club).club_moderator? %>
-  <% modal(title: 'Club Actions') do %>
-    <aside class="menu">
-      <p class="menu-label">
-        Members
-      </p>
-
-      <ul class="menu-list">
-        <li>
-          <%= link_to invites_path(@club) do %>
-            <span class="icon is-small">
-              <%= fa 'user-plus' %>
-            </span>
-
-            <span>
-              Manage Invites
-            </span>
-          <% end %>
-        </li>
-      </ul>
-    </aside>
-  <% end %>
-<% end %>
-
-<%= rp 'clubs/join_tip' %>
-
-<div class="club-header level notification is-primary">
-  <div class="level-left">
-    <div>
-      <p class="title">
-        <%= @club.title %>
-      </p>
-
-      <p class="subtitle">
-        <%= @club.description %>
-      </p>
-    </div>
-  </div>
-
-  <% if user_signed_in? %>
-    <div class="level-right">
-      <span class="icon" data-modal="toggle">
-        <%= fa 'bars fa-lg' %>
-      </span>
-    </div>
-  <% end %>
-</div>
+<%= rp 'clubs/header',
+  club:           @club,
+  can_join:       @can_join,
+  admin_override: @admin_override
+%>
 
 <div class="level">
   <div class="level-left">

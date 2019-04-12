@@ -50,6 +50,8 @@ Rails.application.routes.draw do
   get '/clubs/:id/join', to: 'club_memberships#new', as: :new_club_membership
   post '/clubs/:id/join', to: 'club_memberships#create', as: :create_club_membership
 
+  delete '/clubs/:id/leave', to: 'club_memberships#destroy', as: :destroy_club_membership
+
   get '/clubs/:id/invites', to: 'invites#index', as: :invites
   
   get '/clubs/:id/invite', to: 'invites#new', as: :new_invite
